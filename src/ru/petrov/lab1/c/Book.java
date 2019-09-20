@@ -67,24 +67,21 @@ public class Book {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id &&
-            year == book.year &&
+        return year == book.year &&
             author.equals(book.author) &&
             name.equals(book.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, name, year);
+        return Objects.hash(author, name, year);
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-            "id=" + id +
-            ", author='" + author + '\'' +
+        return "Book:" +
+            " author='" + author + '\'' +
             ", name='" + name + '\'' +
-            ", year=" + year +
-            '}';
+            ", year=" + year;
     }
 }

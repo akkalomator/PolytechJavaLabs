@@ -1,6 +1,5 @@
 package ru.petrov.lab1.c;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,8 @@ public class BookShelf {
 
     public void updateAuthor(Book book, String newAuthor) {
         checkForBookInShelf(book);
-        book.setAuthor(newAuthor);
+        Book storedBook = getAllWhere(book1 -> book1.equals(book)).get(0);
+        storedBook.setAuthor(newAuthor);
     }
 
     public void updateAuthor(int id, String newAuthor) {
@@ -59,7 +59,8 @@ public class BookShelf {
 
     public void updateName(Book book, String newName) {
         checkForBookInShelf(book);
-        book.setName(newName);
+        Book storedBook = getAllWhere(book1 -> book1.equals(book)).get(0);
+        storedBook.setName(newName);
     }
 
     public void updateName(int id, String newName) {
@@ -69,7 +70,8 @@ public class BookShelf {
 
     public void updateYear(Book book, int newYear) {
         checkForBookInShelf(book);
-        book.setYear(newYear);
+        Book storedBook = getAllWhere(book1 -> book1.equals(book)).get(0);
+        storedBook.setYear(newYear);
     }
 
     public void updateYear(int id, int newYear) {
@@ -83,7 +85,8 @@ public class BookShelf {
 
     public void deleteBook(Book book) {
         checkForBookInShelf(book);
-        books.remove(book.getId());
+        Book storedBook = getAllWhere(book1 -> book1.equals(book)).get(0);
+        books.remove(storedBook.getId());
     }
 
     public void deleteById(int id) {

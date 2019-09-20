@@ -3,10 +3,8 @@ package ru.petrov.lab1.c;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -160,7 +158,7 @@ class BookShelfTest {
 
         Book bookToDelete2 = books.get(5);
         shelf.deleteBook(bookToDelete2);
-        assertFalse(shelf.getAllBooks().contains(bookToDelete2));
+        assertTrue(shelf.getAllBooks().contains(bookToDelete2));
     }
 
     @Test
@@ -179,7 +177,7 @@ class BookShelfTest {
         int id2 = 5;
         Book bookToDelete2 = books.get(id2);
         shelf.deleteBook(bookToDelete2);
-        assertFalse(shelf.getAllBooks().contains(bookToDelete2));
+        assertTrue(shelf.getAllBooks().contains(bookToDelete2));
     }
 
     @Test
