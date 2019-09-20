@@ -80,8 +80,8 @@ class BookShelfTest {
     @Test
     public void updateAuthor_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateAuthor(nonExistent, "234"));
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateAuthor(999, "234"));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(nonExistent, "234"));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(999, "234"));
     }
 
     @Test
@@ -100,8 +100,8 @@ class BookShelfTest {
     @Test
     public void updateName_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateName(nonExistent, "234"));
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateAuthor(999, "234"));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateName(nonExistent, "234"));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(999, "234"));
     }
 
     @Test
@@ -120,8 +120,8 @@ class BookShelfTest {
     @Test
     public void updateYear_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateYear(nonExistent, 0));
-        assertThrows(IllegalArgumentException.class, () -> shelf.updateYear(999, 0));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateYear(nonExistent, 0));
+        assertThrows(NoSuchElementException.class, () -> shelf.updateYear(999, 0));
     }
 
     @Test
@@ -195,7 +195,6 @@ class BookShelfTest {
         shelf.deleteAllWhere(book -> book.getAuthor().equals("author1"));
         assertEquals(
             List.of(
-                books.get(1),
                 books.get(2),
                 books.get(3),
                 books.get(4),
