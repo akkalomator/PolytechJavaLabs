@@ -1,9 +1,8 @@
 package ru.petrov.lab3.commands.insert;
 
 import org.junit.jupiter.api.Test;
-import ru.petrov.lab3.commands.append.AppendCharSequence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InsertCharSequenceTest {
 
