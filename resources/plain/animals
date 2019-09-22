@@ -1,0 +1,9 @@
+Herbivorous Cow 80
+Carnivore Hawk 50
+Omnivorous Chicken 30
+Carnivore Lion 150
+Herbivorous Sheep 70
+Omnivorous Bear 180
+Carnivore Tiger 150
+Omnivorous Monkey 70
+Omnivorous Monkey 70 Does not make any sense in context of this task, so we ignore this and everything works just fine
