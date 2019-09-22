@@ -1,168 +1,245 @@
 package ru.petrov.lab3;
 
+import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
+import ru.petrov.lab3.commands.append.Append;
+import ru.petrov.lab3.commands.append.AppendCharArray;
+import ru.petrov.lab3.commands.append.AppendCharSequence;
+import ru.petrov.lab3.commands.append.AppendCodePoint;
+import ru.petrov.lab3.commands.delete.DeleteFromTo;
+import ru.petrov.lab3.commands.insert.InsertCharArray;
+import ru.petrov.lab3.commands.insert.InsertCharSequence;
+import ru.petrov.lab3.commands.insert.InsertCommand;
+import ru.petrov.lab3.commands.others.Replace;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class ImprovedStringBuilder implements Comparable<ImprovedStringBuilder>, CharSequence {
 
     private StringBuilder stringBuilder;
+    private Deque<ImprovedStringBuilderCommand> commands;
 
     public ImprovedStringBuilder() {
         stringBuilder = new StringBuilder();
+        commands = new ArrayDeque<>();
     }
 
     public ImprovedStringBuilder(int capacity) {
         stringBuilder = new StringBuilder(capacity);
+        commands = new ArrayDeque<>();
     }
 
     public ImprovedStringBuilder(String str) {
         stringBuilder = new StringBuilder(str);
+        commands = new ArrayDeque<>();
     }
 
     public ImprovedStringBuilder(CharSequence seq) {
         stringBuilder = new StringBuilder(seq);
+        commands = new ArrayDeque<>();
     }
 
     public ImprovedStringBuilder append(Object obj) {
-        stringBuilder.append(obj);
+        Append<Object> command = new Append<>(stringBuilder, obj);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(String str) {
-        stringBuilder.append(str);
+        Append<String> command = new Append<>(stringBuilder, str);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(StringBuffer sb) {
-        stringBuilder.append(sb);
+        Append<StringBuffer> command = new Append<>(stringBuilder, sb);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(CharSequence s) {
-        stringBuilder.append(s);
+        AppendCharSequence command = new AppendCharSequence(stringBuilder, s, 0, s.length());
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(CharSequence s, int start, int end) {
-        stringBuilder.append(s, start, end);
+        AppendCharSequence command = new AppendCharSequence(stringBuilder, s, start, end);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(char[] str) {
-        stringBuilder.append(str);
+        AppendCharArray command = new AppendCharArray(stringBuilder, str, 0, str.length);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(char[] str, int offset, int len) {
-        stringBuilder.append(str, offset, len);
+        AppendCharArray command = new AppendCharArray(stringBuilder, str, offset, len);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(boolean b) {
-        stringBuilder.append(b);
+        Append<Boolean> command = new Append<>(stringBuilder, b);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(char c) {
-        stringBuilder.append(c);
+        Append<Character> command = new Append<>(stringBuilder, c);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(int i) {
-        stringBuilder.append(i);
+        Append<Integer> command = new Append<>(stringBuilder, i);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(long lng) {
-        stringBuilder.append(lng);
+        Append<Long> command = new Append<>(stringBuilder, lng);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(float f) {
-        stringBuilder.append(f);
+        Append<Float> command = new Append<>(stringBuilder, f);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder append(double d) {
-        stringBuilder.append(d);
+        Append<Double> command = new Append<>(stringBuilder, d);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder appendCodePoint(int codePoint) {
-        stringBuilder.appendCodePoint(codePoint);
+        AppendCodePoint command = new AppendCodePoint(stringBuilder, codePoint);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int index, char[] str, int offset, int len) {
-        stringBuilder.insert(index, str, offset, len);
+        InsertCharArray command = new InsertCharArray(stringBuilder, index, str, offset, len);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, Object obj) {
-        stringBuilder.insert(offset, obj);
+        InsertCommand<Object> command = new InsertCommand<>(stringBuilder, offset, obj);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, String str) {
-        stringBuilder.insert(offset, str);
+        InsertCommand<String> command = new InsertCommand<>(stringBuilder, offset, str);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, char[] str) {
-        stringBuilder.insert(offset, str);
+        InsertCharArray command = new InsertCharArray(stringBuilder, offset, str, 0, str.length);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int dstOffset, CharSequence s) {
-        stringBuilder.insert(dstOffset, s);
+        InsertCharSequence command = new InsertCharSequence(stringBuilder, dstOffset, s, 0, s.length());
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int dstOffset, CharSequence s, int start, int end) {
-        stringBuilder.insert(dstOffset, s, start, end);
+        InsertCharSequence command = new InsertCharSequence(stringBuilder, dstOffset, s, start, end);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
 
     public ImprovedStringBuilder insert(int offset, boolean b) {
-        stringBuilder.insert(offset, b);
+        InsertCommand<Boolean> command = new InsertCommand<>(stringBuilder, offset, b);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, char c) {
-        stringBuilder.insert(offset, c);
+        InsertCommand<Character> command = new InsertCommand<>(stringBuilder, offset, c);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, int i) {
-        stringBuilder.insert(offset, i);
+        InsertCommand<Integer> command = new InsertCommand<>(stringBuilder, offset, i);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, long l) {
-        stringBuilder.insert(offset, l);
+        InsertCommand<Long> command = new InsertCommand<>(stringBuilder, offset, l);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, float f) {
-        stringBuilder.insert(offset, f);
+        InsertCommand<Float> command = new InsertCommand<>(stringBuilder, offset, f);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder insert(int offset, double d) {
-        stringBuilder.insert(offset, d);
+        InsertCommand<Double> command = new InsertCommand<>(stringBuilder, offset, d);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder delete(int start, int end) {
-        stringBuilder.delete(start, end);
+        DeleteFromTo command = new DeleteFromTo(stringBuilder, start, end);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder deleteCharAt(int index) {
-        stringBuilder.deleteCharAt(index);
+        DeleteFromTo command = new DeleteFromTo(stringBuilder, index, index + 1);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
     public ImprovedStringBuilder replace(int start, int end, String str) {
-        stringBuilder.replace(start, end, str);
+        Replace command = new Replace(stringBuilder, start, end, str);
+        command.execute();
+        commands.push(command);
         return this;
     }
 
@@ -177,7 +254,6 @@ public class ImprovedStringBuilder implements Comparable<ImprovedStringBuilder>,
     public int lastIndexOf(String str) {
         return stringBuilder.lastIndexOf(str);
     }
-
 
     public int lastIndexOf(String str, int fromIndex) {
         return stringBuilder.lastIndexOf(str, fromIndex);
@@ -213,6 +289,10 @@ public class ImprovedStringBuilder implements Comparable<ImprovedStringBuilder>,
     }
 
     public void undo() {
-
+        if (commands.isEmpty()) {
+            throw new IllegalStateException("No command were executed yer");
+        }
+        ImprovedStringBuilderCommand command = commands.pop();
+        command.unExecute();
     }
 }
