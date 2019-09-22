@@ -1,4 +1,4 @@
-package ru.petrov.lab3.commands.delete;
+package ru.petrov.lab3.commands.others;
 
 import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
 

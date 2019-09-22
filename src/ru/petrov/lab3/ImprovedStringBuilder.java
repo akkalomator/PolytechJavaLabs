@@ -5,7 +5,7 @@ import ru.petrov.lab3.commands.append.Append;
 import ru.petrov.lab3.commands.append.AppendCharArray;
 import ru.petrov.lab3.commands.append.AppendCharSequence;
 import ru.petrov.lab3.commands.append.AppendCodePoint;
-import ru.petrov.lab3.commands.delete.DeleteFromTo;
+import ru.petrov.lab3.commands.others.DeleteFromTo;
 import ru.petrov.lab3.commands.insert.InsertCharArray;
 import ru.petrov.lab3.commands.insert.InsertCharSequence;
 import ru.petrov.lab3.commands.insert.InsertCommand;
