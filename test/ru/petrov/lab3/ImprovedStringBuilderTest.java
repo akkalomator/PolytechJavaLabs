@@ -54,8 +54,8 @@ class ImprovedStringBuilderTest {
         improvedStringBuilder.append(cs);
         assertEquals(stringBuilder.toString(), improvedStringBuilder.toString());
 
-        stringBuilder.append(cs, 5, 10);
-        improvedStringBuilder.append(cs, 5, 10);
+        stringBuilder.append(cs, 1, 3);
+        improvedStringBuilder.append(cs, 1, 3);
         assertEquals(stringBuilder.toString(), improvedStringBuilder.toString());
 
         char[] chars = {'q', 'w', 'e', 'r', 't', 'y'};
@@ -63,8 +63,8 @@ class ImprovedStringBuilderTest {
         improvedStringBuilder.append(chars);
         assertEquals(stringBuilder.toString(), improvedStringBuilder.toString());
 
-        stringBuilder.append(chars, 5, 10);
-        improvedStringBuilder.append(chars, 5, 10);
+        stringBuilder.append(chars, 3, 2);
+        improvedStringBuilder.append(chars, 3, 2);
         assertEquals(stringBuilder.toString(), improvedStringBuilder.toString());
 
         stringBuilder.append(true);
@@ -198,5 +198,4 @@ class ImprovedStringBuilderTest {
         assertEquals(str, improvedStringBuilder.toString());
 
     }
-
 }

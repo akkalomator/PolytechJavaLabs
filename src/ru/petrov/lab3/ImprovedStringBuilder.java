@@ -2,189 +2,217 @@ package ru.petrov.lab3;
 
 public class ImprovedStringBuilder implements Comparable<ImprovedStringBuilder>, CharSequence {
 
+    private StringBuilder stringBuilder;
+
     public ImprovedStringBuilder() {
+        stringBuilder = new StringBuilder();
     }
 
     public ImprovedStringBuilder(int capacity) {
+        stringBuilder = new StringBuilder(capacity);
     }
 
     public ImprovedStringBuilder(String str) {
+        stringBuilder = new StringBuilder(str);
     }
 
     public ImprovedStringBuilder(CharSequence seq) {
+        stringBuilder = new StringBuilder(seq);
     }
 
     public ImprovedStringBuilder append(Object obj) {
-        return null;
+        stringBuilder.append(obj);
+        return this;
     }
 
     public ImprovedStringBuilder append(String str) {
-        return null;
+        stringBuilder.append(str);
+        return this;
     }
 
     public ImprovedStringBuilder append(StringBuffer sb) {
-        return null;
+        stringBuilder.append(sb);
+        return this;
     }
 
     public ImprovedStringBuilder append(CharSequence s) {
-        return null;
+        stringBuilder.append(s);
+        return this;
     }
 
     public ImprovedStringBuilder append(CharSequence s, int start, int end) {
-        return null;
+        stringBuilder.append(s, start, end);
+        return this;
     }
 
     public ImprovedStringBuilder append(char[] str) {
-        return null;
+        stringBuilder.append(str);
+        return this;
     }
 
     public ImprovedStringBuilder append(char[] str, int offset, int len) {
-        return null;
+        stringBuilder.append(str, offset, len);
+        return this;
     }
 
     public ImprovedStringBuilder append(boolean b) {
-        return null;
+        stringBuilder.append(b);
+        return this;
     }
 
     public ImprovedStringBuilder append(char c) {
-        return null;
+        stringBuilder.append(c);
+        return this;
     }
 
     public ImprovedStringBuilder append(int i) {
-        return null;
+        stringBuilder.append(i);
+        return this;
     }
 
     public ImprovedStringBuilder append(long lng) {
-        return null;
+        stringBuilder.append(lng);
+        return this;
     }
 
     public ImprovedStringBuilder append(float f) {
-        return null;
+        stringBuilder.append(f);
+        return this;
     }
 
     public ImprovedStringBuilder append(double d) {
-        return null;
+        stringBuilder.append(d);
+        return this;
     }
 
     public ImprovedStringBuilder appendCodePoint(int codePoint) {
-        return null;
+        stringBuilder.appendCodePoint(codePoint);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int index, char[] str, int offset, int len) {
-        return null;
+        stringBuilder.insert(index, str, offset, len);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, Object obj) {
-        return null;
+        stringBuilder.insert(offset, obj);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, String str) {
-        return null;
+        stringBuilder.insert(offset, str);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, char[] str) {
-        return null;
+        stringBuilder.insert(offset, str);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int dstOffset, CharSequence s) {
-        return null;
+        stringBuilder.insert(dstOffset, s);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int dstOffset, CharSequence s, int start, int end) {
-        return null;
+        stringBuilder.insert(dstOffset, s, start, end);
+        return this;
     }
 
 
     public ImprovedStringBuilder insert(int offset, boolean b) {
-        return null;
+        stringBuilder.insert(offset, b);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, char c) {
-        return null;
+        stringBuilder.insert(offset, c);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, int i) {
-        return null;
+        stringBuilder.insert(offset, i);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, long l) {
-        return null;
+        stringBuilder.insert(offset, l);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, float f) {
-        return null;
+        stringBuilder.insert(offset, f);
+        return this;
     }
 
     public ImprovedStringBuilder insert(int offset, double d) {
-        return null;
+        stringBuilder.insert(offset, d);
+        return this;
     }
 
     public ImprovedStringBuilder delete(int start, int end) {
-        return null;
+        stringBuilder.delete(start, end);
+        return this;
     }
 
     public ImprovedStringBuilder deleteCharAt(int index) {
-        return null;
+        stringBuilder.deleteCharAt(index);
+        return this;
     }
 
     public ImprovedStringBuilder replace(int start, int end, String str) {
-        return null;
+        stringBuilder.replace(start, end, str);
+        return this;
     }
 
     public int indexOf(String str) {
-        return 0;
+        return stringBuilder.indexOf(str);
     }
 
     public int indexOf(String str, int fromIndex) {
-        return 0;
+        return stringBuilder.indexOf(str, fromIndex);
     }
 
     public int lastIndexOf(String str) {
-        return 0;
+        return stringBuilder.lastIndexOf(str);
     }
 
 
     public int lastIndexOf(String str, int fromIndex) {
-        return 0;
+        return stringBuilder.lastIndexOf(str, fromIndex);
     }
-
 
     public ImprovedStringBuilder reverse() {
-        return null;
+        stringBuilder.reverse();
+        return this;
     }
-
 
     @Override
     public int length() {
-        return 0;
+        return stringBuilder.length();
     }
 
     @Override
     public char charAt(int index) {
-        return 0;
+        return stringBuilder.charAt(index);
     }
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        return null;
+        return stringBuilder.subSequence(start, end);
     }
 
     public String toString() {
-        return null;
-    }
-
-    private void writeObject(java.io.ObjectOutputStream s) {
-    }
-
-
-    private void readObject(java.io.ObjectInputStream s) {
+        return stringBuilder.toString();
     }
 
     @Override
     public int compareTo(ImprovedStringBuilder o) {
-        return 0;
+        return stringBuilder.compareTo(o.stringBuilder);
     }
 
     public void undo() {
+
     }
 }
