@@ -1,0 +1,10 @@
+Task a:
+Animal{id: 5, name: 'Bear', food amount: 180, food type EVERYTHING}
+Animal{id: 3, name: 'Lion', food amount: 150, food type ANIMALS}
+Animal{id: 6, name: 'Tiger', food amount: 150, food type ANIMALS}
+Animal{id: 0, name: 'Cow', food amount: 80, food type PLANTS}
+Animal{id: 7, name: 'Monkey', food amount: 70, food type EVERYTHING}
+Animal{id: 8, name: 'Monkey', food amount: 70, food type EVERYTHING}
+Animal{id: 4, name: 'Sheep', food amount: 70, food type PLANTS}
+Animal{id: 1, name: 'Hawk', food amount: 50, food type ANIMALS}
+Animal{id: 2, name: 'Chicken', food amount: 30, food type EVERYTHING}
