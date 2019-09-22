@@ -4,17 +4,21 @@ import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
 
 public class Reverse extends ImprovedStringBuilderCommand {
 
-    protected Reverse(StringBuilder builder) {
+    public Reverse(StringBuilder builder) {
         super(builder);
     }
 
     @Override
     public void execute() {
         super.execute();
+        builder.reverse();
+        super.afterExecuted();
     }
 
     @Override
     public void unExecute() {
         super.unExecute();
+        builder.reverse();
+        super.afterUnexecuted();
     }
 }

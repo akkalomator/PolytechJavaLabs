@@ -4,17 +4,32 @@ import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
 
 public class Replace extends ImprovedStringBuilderCommand {
 
-    protected Replace(StringBuilder builder, int start, int end, String str) {
+    private final int start;
+    private final int end;
+    private final String str;
+    private String replaced;
+
+    public Replace(StringBuilder builder, int start, int end, String str) {
         super(builder);
+        this.start = start;
+        this.end = end;
+        this.str = str;
     }
 
     @Override
     public void execute() {
         super.execute();
+
+        replaced = builder.substring(start, end);
+        builder.replace(start, end, str);
+
+        super.afterExecuted();
     }
 
     @Override
     public void unExecute() {
         super.unExecute();
+        builder.replace(start, start + str.length(), replaced);
+        super.afterUnexecuted();
     }
 }

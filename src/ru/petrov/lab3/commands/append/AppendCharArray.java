@@ -1,20 +1,24 @@
 package ru.petrov.lab3.commands.append;
 
-import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
+public class AppendCharArray extends AbstractAppend {
 
-public class AppendCharArray extends ImprovedStringBuilderCommand {
+    private final char[] str;
+    private final int offset;
+    private final int len;
 
     public AppendCharArray(StringBuilder builder, char[] str, int offset, int len) {
-        super(builder);
+        super(builder, len);
+        this.str = str;
+        this.offset = offset;
+        this.len = len;
     }
 
     @Override
     public void execute() {
         super.execute();
-    }
 
-    @Override
-    public void unExecute() {
-        super.execute();
+        builder.append(str, offset, len);
+
+        super.afterExecuted();
     }
 }

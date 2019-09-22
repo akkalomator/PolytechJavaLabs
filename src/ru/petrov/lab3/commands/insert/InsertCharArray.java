@@ -1,20 +1,26 @@
 package ru.petrov.lab3.commands.insert;
 
-import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
+public class InsertCharArray extends AbstractInsert {
 
-public class InsertCharArray extends ImprovedStringBuilderCommand {
+    private final int index;
+    private final char[] str;
+    private final int offset;
+    private final int len;
 
-    protected InsertCharArray(StringBuilder builder, int index, char[] str, int offset, int len) {
-        super(builder);
+    public InsertCharArray(StringBuilder builder, int index, char[] str, int offset, int len) {
+        super(builder, index, len);
+        this.index = index;
+        this.str = str;
+        this.offset = offset;
+        this.len = len;
     }
 
     @Override
     public void execute() {
         super.execute();
-    }
 
-    @Override
-    public void unExecute() {
-        super.execute();
+        builder.insert(index, str, offset, len);
+
+        super.afterExecuted();
     }
 }

@@ -1,20 +1,18 @@
 package ru.petrov.lab3.commands.append;
 
-import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
+public class AppendCodePoint extends AbstractAppend {
 
-public class AppendCodePoint extends ImprovedStringBuilderCommand {
+    private final int codePoint;
 
-    protected AppendCodePoint(StringBuilder builder, int codePoint) {
-        super(builder);
+    public AppendCodePoint(StringBuilder builder, int codePoint) {
+        super(builder, 1);
+        this.codePoint = codePoint;
     }
 
     @Override
     public void execute() {
         super.execute();
-    }
-
-    @Override
-    public void unExecute() {
-        super.execute();
+        builder.appendCodePoint(codePoint);
+        super.afterExecuted();
     }
 }
