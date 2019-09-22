@@ -5,19 +5,22 @@ import ru.petrov.lab3.commands.ImprovedStringBuilderCommand;
 public abstract class AbstractInsert extends ImprovedStringBuilderCommand {
 
     private final int from;
-    private final int lenhth;
+    private final int length;
 
     protected AbstractInsert(StringBuilder builder, int from, int length) {
         super(builder);
+        if (length < 0) {
+            throw new IllegalArgumentException("Insert word length must be greater than zero or equal to it");
+        }
         this.from = from;
-        this.lenhth = length;
+        this.length = length;
     }
 
     @Override
     public void unExecute() {
         super.unExecute();
 
-        builder.delete(from, from + lenhth);
+        builder.delete(from, from + length);
 
         super.afterUnexecuted();
     }
