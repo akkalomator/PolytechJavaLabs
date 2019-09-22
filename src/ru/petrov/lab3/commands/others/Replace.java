@@ -11,6 +11,9 @@ public class Replace extends ImprovedStringBuilderCommand {
 
     public Replace(StringBuilder builder, int start, int end, String str) {
         super(builder);
+        if (end < start) {
+            throw new IllegalArgumentException("End index cannot be less than start index");
+        }
         this.start = start;
         this.end = end;
         this.str = str;

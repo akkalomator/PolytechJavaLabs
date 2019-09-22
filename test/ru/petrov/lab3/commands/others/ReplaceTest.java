@@ -7,6 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReplaceTest {
 
     @Test
+    public void constructor_ThrowsOnEndIndexДуыыThanStartIndex() {
+        StringBuilder builder = new StringBuilder();
+        assertThrows(IllegalArgumentException.class, () -> new Replace(builder, 5, 3, "sdf"));
+    }
+
+    @Test
     public void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdef");
         Replace command = new Replace(builder, 2, 4, "vwxyz");
