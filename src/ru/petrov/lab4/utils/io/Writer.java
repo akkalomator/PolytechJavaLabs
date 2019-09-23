@@ -1,6 +1,6 @@
 package ru.petrov.lab4.utils.io;
 
-import ru.petrov.lab4.ConsoleController;
+import ru.petrov.lab4.Controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -30,13 +30,13 @@ public class Writer implements AutoCloseable {
         try {
             writeString(
                 "Available commands: \n" +
-                    ConsoleController.LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
-                    ConsoleController.CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
-                    ConsoleController.MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
-                    ConsoleController.CREATE_FILE_COMMAND + " <name> - create file\n" +
-                    ConsoleController.OPEN_FILE_COMMAND + " <name> - opens file for editing" +
-                    ConsoleController.DELETE_COMMAND + " <name> - delete file or directory\n" +
-                    ConsoleController.QUIT_COMMAND + " - quit from program\n"
+                    Controller.LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
+                    Controller.CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
+                    Controller.MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
+                    Controller.CREATE_FILE_COMMAND + " <name> - create file\n" +
+                    Controller.OPEN_FILE_COMMAND + " <name> - opens file for editing" +
+                    Controller.DELETE_COMMAND + " <name> - delete file or directory\n" +
+                    Controller.QUIT_COMMAND + " - quit from program\n"
             );
         } catch (IOException e) {
             printError(e.getMessage());

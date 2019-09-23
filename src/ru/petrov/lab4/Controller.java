@@ -8,7 +8,7 @@ import ru.petrov.lab4.utils.io.Writer;
 
 import java.io.IOException;
 
-public class ConsoleController implements AutoCloseable {
+public class Controller implements AutoCloseable {
 
     private static final String COMMAND_NOT_RECOGNIZED = "Cannot recognize command %s with %d parameters";
     private static final String WELCOME = "Welcome to File Explorer v0.0.1";
@@ -25,7 +25,7 @@ public class ConsoleController implements AutoCloseable {
     private final Writer writer;
     private final Reader reader;
 
-    public ConsoleController(Reader reader, Writer writer, ExplorerProvider explorerProvider) {
+    public Controller(Reader reader, Writer writer, ExplorerProvider explorerProvider) {
         this.reader = reader;
         this.writer = writer;
         this.explorerProvider = explorerProvider;

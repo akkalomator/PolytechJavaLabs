@@ -1,6 +1,6 @@
 package ru.petrov.lab4.utils.providers;
 
-import ru.petrov.lab4.ConsoleController;
+import ru.petrov.lab4.Controller;
 import ru.petrov.lab4.utils.FileEditor;
 import ru.petrov.lab4.utils.SaveMode;
 import ru.petrov.lab4.utils.io.Reader;
@@ -43,7 +43,7 @@ public class FileEditorProvider {
 
         while (true) {
             String line = reader.getLine();
-            if (line.equalsIgnoreCase(":" + ConsoleController.QUIT_COMMAND)) {
+            if (line.equalsIgnoreCase(":" + Controller.QUIT_COMMAND)) {
                 break;
             }
             editor.appendData(line);

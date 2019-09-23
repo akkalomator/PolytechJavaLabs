@@ -13,7 +13,7 @@ public class Main {
         Reader reader = new Reader(System.in);
         Writer writer = new Writer(System.out);
         ExplorerProvider explorerProvider = new ExplorerProvider((new Explorer("")));
-        ConsoleController app = new ConsoleController(reader, writer, explorerProvider);
+        Controller app = new Controller(reader, writer, explorerProvider);
         app.run();
     }
 }
