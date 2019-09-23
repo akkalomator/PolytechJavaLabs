@@ -3,11 +3,10 @@ package ru.petrov.lab4;
 import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
 import ru.petrov.lab4.utils.SaveMode;
+import ru.petrov.lab4.utils.Writer;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 public class ConsoleController implements AutoCloseable {
@@ -29,22 +28,22 @@ public class ConsoleController implements AutoCloseable {
     private static final String OPTION_APPEND = "a";
 
     private final ExplorerProvider explorerProvider;
+    private final Writer writer;
     private final Scanner sc;
-    private final OutputStreamWriter writer;
 
-    public ConsoleController(InputStream inputStream, OutputStream outputStream, ExplorerProvider explorerProvider) {
+    public ConsoleController(InputStream inputStream, Writer writer, ExplorerProvider explorerProvider) {
         this.sc = new Scanner(inputStream);
-        this.writer = new OutputStreamWriter(outputStream);
+        this.writer = writer;
         this.explorerProvider = explorerProvider;
     }
 
     public void run() throws IOException {
-        writeString(WELCOME + '\n');
+        writer.writeString(WELCOME + '\n');
         while (true) {
             try {
-                writeString(getPrefix());
+                writer.writeString(getPrefix());
             } catch (IOException e) {
-                printError(e.getMessage());
+                writer.printError(e.getMessage());
             }
             String[] command = sc.nextLine().trim().split(" ");
             if (command.length == 0) {
@@ -62,7 +61,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         explorerProvider.onListCommand(command[1]);
                     } catch (IOException e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -70,7 +69,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         explorerProvider.onChangeDirectory(command[1]);
                     } catch (IllegalArgumentException | IOException e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -78,7 +77,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         explorerProvider.onMakeDirectory(command[1]);
                     } catch (IOException e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -86,7 +85,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         explorerProvider.onCreateFile(command[1]);
                     } catch (IOException e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -94,7 +93,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         explorerProvider.onDelete(command[1]);
                     } catch (IOException e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -103,7 +102,7 @@ public class ConsoleController implements AutoCloseable {
                     try {
                         editorMenu(editor);
                     } catch (Exception e) {
-                        printError(e.getMessage());
+                        writer.printError(e.getMessage());
                     }
                     break;
                 }
@@ -114,17 +113,12 @@ public class ConsoleController implements AutoCloseable {
         }
     }
 
-    private void writeString(String s) throws IOException {
-        writer.write(s);
-        writer.flush();
-    }
-
     private boolean checkForValidParametersCount(String[] command) {
         switch (command[0]) {
             case HELP_COMMAND:
             case QUIT_COMMAND: {
                 if (command.length != 1) {
-                    printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
+                    writer.printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
                     return false;
                 }
                 break;
@@ -136,13 +130,13 @@ public class ConsoleController implements AutoCloseable {
             case DELETE_COMMAND:
             case OPEN_FILE_COMMAND: {
                 if (command.length != 2) {
-                    printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
+                    writer.printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
                     return false;
                 }
                 break;
             }
             default: {
-                printError("Cannot recognize command " + command[0]);
+                writer.printError("Cannot recognize command " + command[0]);
                 return false;
             }
         }
@@ -155,7 +149,7 @@ public class ConsoleController implements AutoCloseable {
 
     private void printHelp() {
         try {
-            writeString(
+            writer.writeString(
                 "Available commands: \n" +
                     LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
                     CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
@@ -165,32 +159,24 @@ public class ConsoleController implements AutoCloseable {
                     QUIT_COMMAND + " - quit from program\n"
             );
         } catch (IOException e) {
-            printError(e.getMessage());
-        }
-    }
-
-    private void printError(String error) {
-        try {
-            writeString("ERROR: " + error + " \n");
-        } catch (IOException e) {
-            e.printStackTrace();
+            writer.printError(e.getMessage());
         }
     }
 
     private void editorMenu(FileEditor editor) throws Exception {
-        writeString("Editor\n");
-        writeString("File: " + editor.getName() + "\n");
-        writeString(INTERLINE_DELIMITER + "\n");
+        writer.writeString("Editor\n");
+        writer.writeString("File: " + editor.getName() + "\n");
+        writer.writeString(INTERLINE_DELIMITER + "\n");
 
         editor.open();
         editor.readContent().forEach(line -> {
             try {
-                writeString(line + "\n");
+                writer.writeString(line + "\n");
             } catch (IOException e) {
-                printError("\n");
+                writer.printError("\n");
             }
         });
-        writeString(INTERLINE_DELIMITER + "\n");
+        writer.writeString(INTERLINE_DELIMITER + "\n");
 
         while (true) {
             String line = sc.nextLine();
@@ -208,7 +194,7 @@ public class ConsoleController implements AutoCloseable {
             } else if (line.equalsIgnoreCase(OPTION_APPEND)) {
                 editor.save(SaveMode.APPEND);
             } else {
-                printError("Internal error. Your files may not be saved");
+                writer.printError("Internal error. Your files may not be saved");
             }
         }
 
@@ -226,9 +212,9 @@ public class ConsoleController implements AutoCloseable {
         message = builder.toString();
         while (true) {
             try {
-                writeString(message + "\n");
+                writer.writeString(message + "\n");
             } catch (IOException e) {
-                printError(e.getMessage());
+                writer.printError(e.getMessage());
             }
             String line = sc.nextLine();
             for (String option : options) {
