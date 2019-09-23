@@ -185,9 +185,9 @@ public class ConsoleController implements AutoCloseable {
             editor.appendData(line);
         }
 
-        String line = getUserInputOutOfOptions("Save file?", OPTION_YES, OPTION_NO);
+        String line = reader.getUserInputOutOfOptions(writer, "Save file?", OPTION_YES, OPTION_NO);
         if (line.equalsIgnoreCase(OPTION_YES)) {
-            line = getUserInputOutOfOptions("Rewrite file or append?", OPTION_REWRITE, OPTION_APPEND);
+            line = reader.getUserInputOutOfOptions(writer, "Rewrite file or append?", OPTION_REWRITE, OPTION_APPEND);
             if (line.equalsIgnoreCase(OPTION_REWRITE)) {
                 editor.save(SaveMode.REWRITE);
             } else if (line.equalsIgnoreCase(OPTION_APPEND)) {
@@ -198,30 +198,6 @@ public class ConsoleController implements AutoCloseable {
         }
 
         editor.close();
-    }
-
-    private String getUserInputOutOfOptions(String message, String... options) {
-        StringBuilder builder = new StringBuilder(message);
-        builder.append('(');
-        for (String option : options) {
-            builder.append(option).append('/');
-        }
-        builder.deleteCharAt(builder.length() - 1)
-            .append("):");
-        message = builder.toString();
-        while (true) {
-            try {
-                writer.writeString(message + "\n");
-            } catch (IOException e) {
-                writer.printError(e.getMessage());
-            }
-            String line = reader.getLine();
-            for (String option : options) {
-                if (line.equalsIgnoreCase(option)) {
-                    return line;
-                }
-            }
-        }
     }
 
     @Override
