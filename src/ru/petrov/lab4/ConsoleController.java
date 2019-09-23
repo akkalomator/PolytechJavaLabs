@@ -4,7 +4,6 @@ import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
 import ru.petrov.lab4.utils.FileEditorProvider;
 import ru.petrov.lab4.utils.io.Reader;
-import ru.petrov.lab4.utils.SaveMode;
 import ru.petrov.lab4.utils.io.Writer;
 
 import java.io.IOException;
@@ -20,12 +19,7 @@ public class ConsoleController implements AutoCloseable {
     public static final String MAKE_DIRECTORY_COMMAND = "mkdir";
     public static final String CREATE_FILE_COMMAND = "touch";
     public static final String DELETE_COMMAND = "rm";
-    private static final String OPEN_FILE_COMMAND = "open";
-    private static final String INTERLINE_DELIMITER = "--------------------------------------------";
-    private static final String OPTION_YES = "y";
-    private static final String OPTION_NO = "n";
-    private static final String OPTION_REWRITE = "r";
-    private static final String OPTION_APPEND = "a";
+    public static final String OPEN_FILE_COMMAND = "open";
 
     private final ExplorerProvider explorerProvider;
     private final Writer writer;
@@ -99,8 +93,9 @@ public class ConsoleController implements AutoCloseable {
                 }
                 case OPEN_FILE_COMMAND: {
                     FileEditor editor = new FileEditor(explorerProvider.getOpenedFilePath(command[1]));
+                    FileEditorProvider provider = new FileEditorProvider(editor, reader, writer);
                     try {
-                        editorMenu(editor);
+                        provider.editorMenu();
                     } catch (Exception e) {
                         writer.printError(e.getMessage());
                     }
@@ -145,44 +140,6 @@ public class ConsoleController implements AutoCloseable {
 
     private String getPrefix() {
         return explorerProvider.getCurrentPath() + "> ";
-    }
-
-    private void editorMenu(FileEditor editor) throws Exception {
-        writer.writeString("Editor\n");
-        writer.writeString("File: " + editor.getName() + "\n");
-        writer.writeString(INTERLINE_DELIMITER + "\n");
-
-        editor.open();
-        editor.readContent().forEach(line -> {
-            try {
-                writer.writeString(line + "\n");
-            } catch (IOException e) {
-                writer.printError("\n");
-            }
-        });
-        writer.writeString(INTERLINE_DELIMITER + "\n");
-
-        while (true) {
-            String line = reader.getLine();
-            if (line.equalsIgnoreCase(":" + QUIT_COMMAND)) {
-                break;
-            }
-            editor.appendData(line);
-        }
-
-        String line = reader.getUserInputOutOfOptions(writer, "Save file?", OPTION_YES, OPTION_NO);
-        if (line.equalsIgnoreCase(OPTION_YES)) {
-            line = reader.getUserInputOutOfOptions(writer, "Rewrite file or append?", OPTION_REWRITE, OPTION_APPEND);
-            if (line.equalsIgnoreCase(OPTION_REWRITE)) {
-                editor.save(SaveMode.REWRITE);
-            } else if (line.equalsIgnoreCase(OPTION_APPEND)) {
-                editor.save(SaveMode.APPEND);
-            } else {
-                writer.printError("Internal error. Your files may not be saved");
-            }
-        }
-
-        editor.close();
     }
 
     @Override
