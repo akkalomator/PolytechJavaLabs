@@ -27,9 +27,9 @@ class ExplorerTest {
 
     @Test
     public void constructor_WorksCorrectly() throws IOException {
-        assertEquals(Paths.get(""), new Explorer().getCurrentPath());   // Path is set to path of executable
+        assertEquals(Path.of(""), new Explorer().getCurrentPath());   // Path is set to path of executable
 
-        assertEquals("C:\\", new Explorer("C:\\").getCurrentPath().toString());
+        assertEquals(Path.of("C:/"), new Explorer("C:/").getCurrentPath());
     }
 
     @Test
@@ -39,7 +39,6 @@ class ExplorerTest {
             Path.of("b"),
             Path.of("c")
         );
-
         assertEquals(inDirectory, explorer.getEverythingInDirectory());
     }
 

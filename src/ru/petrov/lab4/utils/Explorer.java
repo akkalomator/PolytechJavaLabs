@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 
 public class Explorer {
 
+    private static final String DEFAULT_PATH = "";
+
     private Path currentPath;
 
     public Explorer() {
-        currentPath = Paths.get("");
+        currentPath = Paths.get(DEFAULT_PATH);
     }
 
     public Explorer(String path) throws IOException {
