@@ -3,7 +3,7 @@ package ru.petrov.lab5;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PropertiesParserTest {
 
     @Test
-    public void parse_WorksCorrectly() throws FileNotFoundException {
+    public void parse_WorksCorrectly() throws IOException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         parser.parse();
         Map<String, String> resultProperties = parser.getProperties();
