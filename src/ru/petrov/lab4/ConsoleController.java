@@ -1,14 +1,16 @@
 package ru.petrov.lab4;
 
-import ru.petrov.lab4.utils.Explorer;
 import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
 import ru.petrov.lab4.utils.SaveMode;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
-public class ConsoleController {
+public class ConsoleController implements AutoCloseable {
 
     private static final String COMMAND_NOT_RECOGNIZED = "Cannot recognize command %s with %d parameters";
     private static final String WELCOME = "Welcome to File Explorer v0.0.1";
@@ -26,21 +28,24 @@ public class ConsoleController {
     private static final String OPTION_REWRITE = "r";
     private static final String OPTION_APPEND = "a";
 
-    private static ExplorerProvider explorerProvider;
-    private static Scanner sc;
+    private final ExplorerProvider explorerProvider;
+    private final Scanner sc;
+    private final OutputStreamWriter writer;
 
-    public static void run() {
-        System.out.println(WELCOME);
+    public ConsoleController(InputStream inputStream, OutputStream outputStream, ExplorerProvider explorerProvider) {
+        this.sc = new Scanner(inputStream);
+        this.writer = new OutputStreamWriter(outputStream);
+        this.explorerProvider = explorerProvider;
+    }
 
-        sc = new Scanner(System.in);
-        try {
-            explorerProvider = new ExplorerProvider((new Explorer("")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+    public void run() throws IOException {
+        writeString(WELCOME + '\n');
         while (true) {
-            System.out.print(getPrefix());
+            try {
+                writeString(getPrefix());
+            } catch (IOException e) {
+                printError(e.getMessage());
+            }
             String[] command = sc.nextLine().trim().split(" ");
             if (command.length == 0) {
                 continue;
@@ -109,7 +114,12 @@ public class ConsoleController {
         }
     }
 
-    private static boolean checkForValidParametersCount(String[] command) {
+    private void writeString(String s) throws IOException {
+        writer.write(s);
+        writer.flush();
+    }
+
+    private boolean checkForValidParametersCount(String[] command) {
         switch (command[0]) {
             case HELP_COMMAND:
             case QUIT_COMMAND: {
@@ -139,35 +149,48 @@ public class ConsoleController {
         return true;
     }
 
-    private static String getPrefix() {
+    private String getPrefix() {
         return explorerProvider.getCurrentPath() + "> ";
     }
 
-    private static void printHelp() {
-        System.out.println(
-            "Available commands: \n" +
-                LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
-                CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
-                MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
-                CREATE_FILE_COMMAND + " <name> - create file\n" +
-                DELETE_COMMAND + " <name> - delete file or directory\n" +
-                QUIT_COMMAND + " - quit from program"
-        );
+    private void printHelp() {
+        try {
+            writeString(
+                "Available commands: \n" +
+                    LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
+                    CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
+                    MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
+                    CREATE_FILE_COMMAND + " <name> - create file\n" +
+                    DELETE_COMMAND + " <name> - delete file or directory\n" +
+                    QUIT_COMMAND + " - quit from program\n"
+            );
+        } catch (IOException e) {
+            printError(e.getMessage());
+        }
     }
 
-    private static void printError(String error) {
-        System.out.println("ERROR: " + error);
+    private void printError(String error) {
+        try {
+            writeString("ERROR: " + error + " \n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-
-    private static void editorMenu(FileEditor editor) throws Exception {
-        System.out.println("Editor");
-        System.out.println("File: " + editor.getName());
-        System.out.println(INTERLINE_DELIMITER);
+    private void editorMenu(FileEditor editor) throws Exception {
+        writeString("Editor\n");
+        writeString("File: " + editor.getName() + "\n");
+        writeString(INTERLINE_DELIMITER + "\n");
 
         editor.open();
-        editor.readContent().forEach(System.out::println);
-        System.out.println(INTERLINE_DELIMITER);
+        editor.readContent().forEach(line -> {
+            try {
+                writeString(line + "\n");
+            } catch (IOException e) {
+                printError("\n");
+            }
+        });
+        writeString(INTERLINE_DELIMITER + "\n");
 
         while (true) {
             String line = sc.nextLine();
@@ -192,7 +215,7 @@ public class ConsoleController {
         editor.close();
     }
 
-    private static String getUserInputOutOfOptions(String message, String... options) {
+    private String getUserInputOutOfOptions(String message, String... options) {
         StringBuilder builder = new StringBuilder(message);
         builder.append('(');
         for (String option : options) {
@@ -202,7 +225,11 @@ public class ConsoleController {
             .append("):");
         message = builder.toString();
         while (true) {
-            System.out.println(message);
+            try {
+                writeString(message + "\n");
+            } catch (IOException e) {
+                printError(e.getMessage());
+            }
             String line = sc.nextLine();
             for (String option : options) {
                 if (line.equalsIgnoreCase(option)) {
@@ -210,5 +237,11 @@ public class ConsoleController {
                 }
             }
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        sc.close();
+        writer.close();
     }
 }
