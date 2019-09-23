@@ -30,3 +30,8 @@ _______________________________________________________________________________
 - Class FileEditor provides logic of editing files.
 - Classes in utils.io are encapsulating logic of input/output needed by controller
 - Classes in utils.providers are wrappers around Explorer and FileEditor, thus allowing easier usage without violating Single Responsibility Principle
+
+_______________________________________________________________________________
+
+- Sources for Lab #5 are located at src/ru/petrov/lab5
+- Tests for Lab #5 are located at test/ru/petrov/lab5
