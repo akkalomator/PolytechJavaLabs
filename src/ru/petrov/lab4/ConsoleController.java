@@ -1,13 +1,11 @@
 package ru.petrov.lab4;
 
 import ru.petrov.lab4.utils.Explorer;
+import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
 import ru.petrov.lab4.utils.SaveMode;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleController {
@@ -28,7 +26,7 @@ public class ConsoleController {
     private static final String OPTION_REWRITE = "r";
     private static final String OPTION_APPEND = "a";
 
-    private static Explorer explorer;
+    private static ExplorerProvider explorerProvider;
     private static Scanner sc;
 
     public static void run() {
@@ -36,7 +34,7 @@ public class ConsoleController {
 
         sc = new Scanner(System.in);
         try {
-            explorer = new Explorer("");
+            explorerProvider = new ExplorerProvider((new Explorer("")));
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -57,13 +55,7 @@ public class ConsoleController {
                 }
                 case LIST_COMMAND: {
                     try {
-                        List<Path> content;
-                        if (command[1].equals(".")) {
-                            content = explorer.getEverythingInDirectory();
-                        } else {
-                            content = explorer.getEverythingInDirectory(command[1]);
-                        }
-                        content.forEach(System.out::println);
+                        explorerProvider.onListCommand(command[1]);
                     } catch (IOException e) {
                         printError(e.getMessage());
                     }
@@ -71,8 +63,7 @@ public class ConsoleController {
                 }
                 case CHANGE_DIRECTORY_COMMAND: {
                     try {
-                        Path path = Path.of(command[1]);
-                        explorer.moveTo(path);
+                        explorerProvider.onChangeDirectory(command[1]);
                     } catch (IllegalArgumentException | IOException e) {
                         printError(e.getMessage());
                     }
@@ -80,7 +71,7 @@ public class ConsoleController {
                 }
                 case MAKE_DIRECTORY_COMMAND: {
                     try {
-                        explorer.createDir(command[1]);
+                        explorerProvider.onMakeDirectory(command[1]);
                     } catch (IOException e) {
                         printError(e.getMessage());
                     }
@@ -88,7 +79,7 @@ public class ConsoleController {
                 }
                 case CREATE_FILE_COMMAND: {
                     try {
-                        explorer.createFile(command[1]);
+                        explorerProvider.onCreateFile(command[1]);
                     } catch (IOException e) {
                         printError(e.getMessage());
                     }
@@ -96,18 +87,14 @@ public class ConsoleController {
                 }
                 case DELETE_COMMAND: {
                     try {
-                        Path path = Path.of(command[1]);
-                        if (!path.isAbsolute()) {
-                            path = explorer.getCurrentPath().resolve(path);
-                        }
-                        explorer.delete(new File(path.toString()));
+                        explorerProvider.onDelete(command[1]);
                     } catch (IOException e) {
                         printError(e.getMessage());
                     }
                     break;
                 }
                 case OPEN_FILE_COMMAND: {
-                    FileEditor editor = new FileEditor(explorer.getCurrentPath().resolve(command[1]));
+                    FileEditor editor = new FileEditor(explorerProvider.getOpenedFilePath(command[1]));
                     try {
                         editorMenu(editor);
                     } catch (Exception e) {
@@ -153,7 +140,7 @@ public class ConsoleController {
     }
 
     private static String getPrefix() {
-        return explorer.getCurrentPath() + "> ";
+        return explorerProvider.getCurrentPath() + "> ";
     }
 
     private static void printHelp() {
