@@ -2,12 +2,11 @@ package ru.petrov.lab4;
 
 import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
+import ru.petrov.lab4.utils.Reader;
 import ru.petrov.lab4.utils.SaveMode;
 import ru.petrov.lab4.utils.Writer;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
 
 public class ConsoleController implements AutoCloseable {
 
@@ -29,10 +28,10 @@ public class ConsoleController implements AutoCloseable {
 
     private final ExplorerProvider explorerProvider;
     private final Writer writer;
-    private final Scanner sc;
+    private final Reader reader;
 
-    public ConsoleController(InputStream inputStream, Writer writer, ExplorerProvider explorerProvider) {
-        this.sc = new Scanner(inputStream);
+    public ConsoleController(Reader reader, Writer writer, ExplorerProvider explorerProvider) {
+        this.reader = reader;
         this.writer = writer;
         this.explorerProvider = explorerProvider;
     }
@@ -45,7 +44,7 @@ public class ConsoleController implements AutoCloseable {
             } catch (IOException e) {
                 writer.printError(e.getMessage());
             }
-            String[] command = sc.nextLine().trim().split(" ");
+            String[] command = reader.getLine().trim().split(" ");
             if (command.length == 0) {
                 continue;
             }
@@ -179,7 +178,7 @@ public class ConsoleController implements AutoCloseable {
         writer.writeString(INTERLINE_DELIMITER + "\n");
 
         while (true) {
-            String line = sc.nextLine();
+            String line = reader.getLine();
             if (line.equalsIgnoreCase(":" + QUIT_COMMAND)) {
                 break;
             }
@@ -216,7 +215,7 @@ public class ConsoleController implements AutoCloseable {
             } catch (IOException e) {
                 writer.printError(e.getMessage());
             }
-            String line = sc.nextLine();
+            String line = reader.getLine();
             for (String option : options) {
                 if (line.equalsIgnoreCase(option)) {
                     return line;
@@ -227,7 +226,7 @@ public class ConsoleController implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        sc.close();
+        reader.close();
         writer.close();
     }
 }
