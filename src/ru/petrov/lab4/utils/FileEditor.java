@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class FileEditor implements AutoCloseable {
 
+    private static final String EDITOR_NOT_OPENED_EXCEPTION_MESSAGE = "File editor has not been opened yet";
+
     private BufferedReader reader;
     private Path filePath;
     private boolean isOpened;
@@ -29,21 +31,21 @@ public class FileEditor implements AutoCloseable {
 
     public List<String> readContent() {
         if (!isOpened) {
-            throw new IllegalStateException("File editor has not been opened yet");
+            throw new IllegalStateException(EDITOR_NOT_OPENED_EXCEPTION_MESSAGE);
         }
         return reader.lines().collect(Collectors.toList());
     }
 
     public void appendData(String str) {
         if (!isOpened) {
-            throw new IllegalStateException("File editor has not been opened yet");
+            throw new IllegalStateException(EDITOR_NOT_OPENED_EXCEPTION_MESSAGE);
         }
         builder.append(str).append("\n");
     }
 
     public void save(SaveMode saveMode) throws IOException {
         if (!isOpened) {
-            throw new IllegalStateException("File editor has not been opened yet");
+            throw new IllegalStateException(EDITOR_NOT_OPENED_EXCEPTION_MESSAGE);
         }
         if (saveMode == SaveMode.APPEND) {
             try (FileWriter writer = new FileWriter(filePath.toString(), true)) {
