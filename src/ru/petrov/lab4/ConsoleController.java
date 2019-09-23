@@ -12,11 +12,27 @@ import java.util.Scanner;
 
 public class ConsoleController {
 
+    private static final String COMMAND_NOT_RECOGNIZED = "Cannot recognize command %s with %d parameters";
+    private static final String WELCOME = "Welcome to File Explorer v0.0.1";
+    private static final String HELP_COMMAND = "help";
+    private static final String QUIT_COMMAND = "q";
+    private static final String LIST_COMMAND = "ls";
+    private static final String CHANGE_DIRECTORY_COMMAND = "cd";
+    private static final String MAKE_DIRECTORY_COMMAND = "mkdir";
+    private static final String CREATE_FILE_COMMAND = "touch";
+    private static final String DELETE_COMMAND = "rm";
+    private static final String OPEN_FILE_COMMAND = "open";
+    private static final String INTERLINE_DELIMITER = "--------------------------------------------";
+    private static final String OPTION_YES = "y";
+    private static final String OPTION_NO = "n";
+    private static final String OPTION_REWRITE = "r";
+    private static final String OPTION_APPEND = "a";
+
     private static Explorer explorer;
     private static Scanner sc;
 
     public static void run() {
-        System.out.println("Welcome to File Explorer v0.0.1");
+        System.out.println(WELCOME);
 
         sc = new Scanner(System.in);
         try {
@@ -35,11 +51,11 @@ public class ConsoleController {
                 continue;
             }
             switch (command[0]) {
-                case "help": {
+                case HELP_COMMAND: {
                     printHelp();
                     break;
                 }
-                case "ls": {
+                case LIST_COMMAND: {
                     try {
                         List<Path> content;
                         if (command[1].equals(".")) {
@@ -53,7 +69,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "cd": {
+                case CHANGE_DIRECTORY_COMMAND: {
                     try {
                         Path path = Path.of(command[1]);
                         explorer.moveTo(path);
@@ -62,7 +78,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "mkdir": {
+                case MAKE_DIRECTORY_COMMAND: {
                     try {
                         explorer.createDir(command[1]);
                     } catch (IOException e) {
@@ -70,7 +86,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "touch": {
+                case CREATE_FILE_COMMAND: {
                     try {
                         explorer.createFile(command[1]);
                     } catch (IOException e) {
@@ -78,7 +94,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "rm": {
+                case DELETE_COMMAND: {
                     try {
                         Path path = Path.of(command[1]);
                         if (!path.isAbsolute()) {
@@ -90,7 +106,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "open": {
+                case OPEN_FILE_COMMAND: {
                     FileEditor editor = new FileEditor(explorer.getCurrentPath().resolve(command[1]));
                     try {
                         editorMenu(editor);
@@ -99,7 +115,7 @@ public class ConsoleController {
                     }
                     break;
                 }
-                case "q": {
+                case QUIT_COMMAND: {
                     return;
                 }
             }
@@ -108,22 +124,22 @@ public class ConsoleController {
 
     private static boolean checkForValidParametersCount(String[] command) {
         switch (command[0]) {
-            case "help":
-            case "q": {
+            case HELP_COMMAND:
+            case QUIT_COMMAND: {
                 if (command.length != 1) {
-                    printError("Cannot recognize command " + command[0] + " with " + command.length + " parameters");
+                    printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
                     return false;
                 }
                 break;
             }
-            case "ls":
-            case "cd":
-            case "mkdir":
-            case "touch":
-            case "rm":
-            case "open": {
+            case LIST_COMMAND:
+            case CHANGE_DIRECTORY_COMMAND:
+            case MAKE_DIRECTORY_COMMAND:
+            case CREATE_FILE_COMMAND:
+            case DELETE_COMMAND:
+            case OPEN_FILE_COMMAND: {
                 if (command.length != 2) {
-                    printError("Cannot recognize command " + command[0] + " with " + command.length + " parameters");
+                    printError(String.format(COMMAND_NOT_RECOGNIZED, command[0], command.length));
                     return false;
                 }
                 break;
@@ -143,12 +159,12 @@ public class ConsoleController {
     private static void printHelp() {
         System.out.println(
             "Available commands: \n" +
-                "ls <path> - lists all files and directories in current directory\n" +
-                "cd <path> - move to specified path\n" +
-                "mkdir <name> - create directory\n" +
-                "touch <name> - create file\n" +
-                "rm <name> - delete file or directory\n" +
-                "q - quit from program"
+                LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
+                CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
+                MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
+                CREATE_FILE_COMMAND + " <name> - create file\n" +
+                DELETE_COMMAND + " <name> - delete file or directory\n" +
+                QUIT_COMMAND + " - quit from program"
         );
     }
 
@@ -160,44 +176,52 @@ public class ConsoleController {
     private static void editorMenu(FileEditor editor) throws Exception {
         System.out.println("Editor");
         System.out.println("File: " + editor.getName());
-        System.out.println("--------------------------------------------");
-        System.out.println("Content:\n");
+        System.out.println(INTERLINE_DELIMITER);
 
         editor.open();
         editor.readContent().forEach(System.out::println);
-        System.out.println("--------------------------------------------");
+        System.out.println(INTERLINE_DELIMITER);
 
         while (true) {
             String line = sc.nextLine();
-            if (line.equalsIgnoreCase(":q")) {
+            if (line.equalsIgnoreCase(":" + QUIT_COMMAND)) {
                 break;
             }
             editor.appendData(line);
         }
 
-        while (true) {
-            System.out.println("Save? (y/n)");
-            String line = sc.nextLine();
-            if (line.equalsIgnoreCase("y")) {
-                while (true) {
-                    System.out.println("Rewrite file or append? (r/a)");
-                    line = sc.nextLine();
-                    if (line.equalsIgnoreCase("r")) {
-                        editor.save(SaveMode.REWRITE);
-                        break;
-                    }
-                    if (line.equalsIgnoreCase("a")) {
-                        editor.save(SaveMode.APPEND);
-                        break;
-                    }
-                }
-                break;
-            }
-            if (line.equalsIgnoreCase("n")) {
-                break;
+        String line = getUserInputOutOfOptions("Save file?", OPTION_YES, OPTION_NO);
+        if (line.equalsIgnoreCase(OPTION_YES)) {
+            line = getUserInputOutOfOptions("Rewrite file or append?", OPTION_REWRITE, OPTION_APPEND);
+            if (line.equalsIgnoreCase(OPTION_REWRITE)) {
+                editor.save(SaveMode.REWRITE);
+            } else if (line.equalsIgnoreCase(OPTION_APPEND)) {
+                editor.save(SaveMode.APPEND);
+            } else {
+                printError("Internal error. Your files may not be saved");
             }
         }
 
         editor.close();
+    }
+
+    private static String getUserInputOutOfOptions(String message, String... options) {
+        StringBuilder builder = new StringBuilder(message);
+        builder.append('(');
+        for (String option : options) {
+            builder.append(option).append('/');
+        }
+        builder.deleteCharAt(builder.length() - 1)
+            .append("):");
+        message = builder.toString();
+        while (true) {
+            System.out.println(message);
+            String line = sc.nextLine();
+            for (String option : options) {
+                if (line.equalsIgnoreCase(option)) {
+                    return line;
+                }
+            }
+        }
     }
 }
