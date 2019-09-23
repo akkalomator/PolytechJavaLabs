@@ -1,4 +1,6 @@
-package ru.petrov.lab4.utils;
+package ru.petrov.lab4.utils.providers;
+
+import ru.petrov.lab4.utils.Explorer;
 
 import java.io.File;
 import java.io.IOException;

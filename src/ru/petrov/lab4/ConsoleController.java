@@ -1,8 +1,8 @@
 package ru.petrov.lab4;
 
-import ru.petrov.lab4.utils.ExplorerProvider;
+import ru.petrov.lab4.utils.providers.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
-import ru.petrov.lab4.utils.FileEditorProvider;
+import ru.petrov.lab4.utils.providers.FileEditorProvider;
 import ru.petrov.lab4.utils.io.Reader;
 import ru.petrov.lab4.utils.io.Writer;
 

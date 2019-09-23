@@ -1,6 +1,8 @@
-package ru.petrov.lab4.utils;
+package ru.petrov.lab4.utils.providers;
 
 import ru.petrov.lab4.ConsoleController;
+import ru.petrov.lab4.utils.FileEditor;
+import ru.petrov.lab4.utils.SaveMode;
 import ru.petrov.lab4.utils.io.Reader;
 import ru.petrov.lab4.utils.io.Writer;
 
