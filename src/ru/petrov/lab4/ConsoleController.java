@@ -2,6 +2,7 @@ package ru.petrov.lab4;
 
 import ru.petrov.lab4.utils.ExplorerProvider;
 import ru.petrov.lab4.utils.FileEditor;
+import ru.petrov.lab4.utils.FileEditorProvider;
 import ru.petrov.lab4.utils.io.Reader;
 import ru.petrov.lab4.utils.SaveMode;
 import ru.petrov.lab4.utils.io.Writer;
@@ -13,12 +14,12 @@ public class ConsoleController implements AutoCloseable {
     private static final String COMMAND_NOT_RECOGNIZED = "Cannot recognize command %s with %d parameters";
     private static final String WELCOME = "Welcome to File Explorer v0.0.1";
     private static final String HELP_COMMAND = "help";
-    private static final String QUIT_COMMAND = "q";
-    private static final String LIST_COMMAND = "ls";
-    private static final String CHANGE_DIRECTORY_COMMAND = "cd";
-    private static final String MAKE_DIRECTORY_COMMAND = "mkdir";
-    private static final String CREATE_FILE_COMMAND = "touch";
-    private static final String DELETE_COMMAND = "rm";
+    public static final String QUIT_COMMAND = "q";
+    public static final String LIST_COMMAND = "ls";
+    public static final String CHANGE_DIRECTORY_COMMAND = "cd";
+    public static final String MAKE_DIRECTORY_COMMAND = "mkdir";
+    public static final String CREATE_FILE_COMMAND = "touch";
+    public static final String DELETE_COMMAND = "rm";
     private static final String OPEN_FILE_COMMAND = "open";
     private static final String INTERLINE_DELIMITER = "--------------------------------------------";
     private static final String OPTION_YES = "y";
@@ -53,7 +54,7 @@ public class ConsoleController implements AutoCloseable {
             }
             switch (command[0]) {
                 case HELP_COMMAND: {
-                    printHelp();
+                    writer.printHelp();
                     break;
                 }
                 case LIST_COMMAND: {
@@ -144,22 +145,6 @@ public class ConsoleController implements AutoCloseable {
 
     private String getPrefix() {
         return explorerProvider.getCurrentPath() + "> ";
-    }
-
-    private void printHelp() {
-        try {
-            writer.writeString(
-                "Available commands: \n" +
-                    LIST_COMMAND + " <path> - lists all files and directories in current directory\n" +
-                    CHANGE_DIRECTORY_COMMAND + " <path> - move to specified path\n" +
-                    MAKE_DIRECTORY_COMMAND + " <name> - create directory\n" +
-                    CREATE_FILE_COMMAND + " <name> - create file\n" +
-                    DELETE_COMMAND + " <name> - delete file or directory\n" +
-                    QUIT_COMMAND + " - quit from program\n"
-            );
-        } catch (IOException e) {
-            writer.printError(e.getMessage());
-        }
     }
 
     private void editorMenu(FileEditor editor) throws Exception {
