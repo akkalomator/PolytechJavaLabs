@@ -1,4 +1,4 @@
-package ru.petrov.lab4.utils;
+package ru.petrov.lab4.utils.io;
 
 import java.io.IOException;
 import java.io.OutputStream;
