@@ -10,7 +10,7 @@ public class PropertiesParser {
         this.inputStream = inputStream;
     }
 
-    public void read() {
+    public void parse() {
 
     }
 
