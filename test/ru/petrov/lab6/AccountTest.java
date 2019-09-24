@@ -1,6 +1,7 @@
 package ru.petrov.lab6;
 
 import org.junit.jupiter.api.Test;
+import ru.petrov.lab6.exceptions.NotEnoughMoneyException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ class AccountTest {
     @Test
     public void changeAmount_ThrowsOnResultingAmountLessThanZero() {
         Account account = new Account(0, 50);
-        assertThrows(NotEnoughMoneyExeption.class, () -> account.changeAmount(-100));
+        assertThrows(NotEnoughMoneyException.class, () -> account.changeAmount(-100));
     }
 
     @Test

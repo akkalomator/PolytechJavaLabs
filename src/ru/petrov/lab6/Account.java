@@ -1,5 +1,7 @@
 package ru.petrov.lab6;
 
+import ru.petrov.lab6.exceptions.NotEnoughMoneyException;
+
 public class Account {
 
     private final int id;
@@ -23,7 +25,7 @@ public class Account {
 
     void changeAmount(int amount) {
         if (this.amount + amount < 0) {
-            throw new NotEnoughMoneyExeption("Not enough money to complete transaction");
+            throw new NotEnoughMoneyException("Not enough money to complete transaction");
         }
         this.amount += amount;
     }

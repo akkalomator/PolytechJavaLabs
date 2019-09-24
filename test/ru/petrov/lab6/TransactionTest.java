@@ -2,6 +2,7 @@ package ru.petrov.lab6;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.petrov.lab6.exceptions.TransactionFailedException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,5 +1,7 @@
 package ru.petrov.lab6;
 
+import ru.petrov.lab6.exceptions.TransactionFailedException;
+
 public class Transaction {
 
     private final int id;

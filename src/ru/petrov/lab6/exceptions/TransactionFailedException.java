@@ -1,4 +1,4 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.exceptions;
 
 public class TransactionFailedException extends RuntimeException {
     public TransactionFailedException() {
