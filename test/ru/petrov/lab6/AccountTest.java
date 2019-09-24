@@ -26,4 +26,14 @@ class AccountTest {
         account.changeAmount(-100);
         assertEquals(50, account.getAmount());
     }
+
+    @Test
+    public void haveEnoughMoney_WorksCorrectly() {
+        Account account = new Account(0, 50);
+        assertTrue(account.haveEnoughMoney(0));
+        assertTrue(account.haveEnoughMoney(49));
+        assertTrue(account.haveEnoughMoney(50));
+        assertFalse(account.haveEnoughMoney(51));
+        assertFalse(account.haveEnoughMoney(100));
+    }
 }
