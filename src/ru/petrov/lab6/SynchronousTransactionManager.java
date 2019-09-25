@@ -4,10 +4,12 @@ import ru.petrov.lab6.exceptions.TransactionFailedException;
 
 import java.util.List;
 
-public class SynchronousTransactionManager extends TransactionManager{
+public class SynchronousTransactionManager implements TransactionManager{
+
+    protected List<Transaction> transactions;
 
     public SynchronousTransactionManager(List<Transaction> transactions) {
-        super(transactions);
+        this.transactions = transactions;
     }
 
     @Override
