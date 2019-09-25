@@ -1,9 +1,11 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.utils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import ru.petrov.lab6.transactions.Account;
+import ru.petrov.lab6.transactions.Transaction;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

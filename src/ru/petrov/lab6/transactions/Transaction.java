@@ -1,4 +1,4 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.transactions;
 
 import ru.petrov.lab6.exceptions.TransactionFailedException;
 
@@ -10,6 +10,7 @@ public class Transaction {
     private final Account from;
     private final Account to;
     private final int amount;
+
     private boolean isCompleted;
 
     public Transaction(int id, Account from, Account to, int amount) {
@@ -58,6 +59,10 @@ public class Transaction {
 
     public Account getReciever() {
         return to;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     @Override

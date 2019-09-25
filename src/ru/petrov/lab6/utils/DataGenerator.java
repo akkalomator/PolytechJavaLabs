@@ -1,4 +1,4 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class DataGenerator {
 
-    private static final int TRANSACTION_NUMBER = 10000;
-    private static final int USERS_NUMBER = 100;
+    private static final int TRANSACTION_NUMBER = 5000;
+    private static final int USERS_NUMBER = 10;
     private static final int MAX_SUM = 50000;
 
     public static void main(String[] args) throws IOException {

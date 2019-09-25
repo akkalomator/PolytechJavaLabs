@@ -1,8 +1,10 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.transactions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.petrov.lab6.exceptions.TransactionFailedException;
+import ru.petrov.lab6.transactions.Account;
+import ru.petrov.lab6.transactions.Transaction;
 
 import static org.junit.jupiter.api.Assertions.*;
 

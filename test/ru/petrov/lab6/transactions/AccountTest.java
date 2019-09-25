@@ -1,7 +1,8 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.transactions;
 
 import org.junit.jupiter.api.Test;
 import ru.petrov.lab6.exceptions.NotEnoughMoneyException;
+import ru.petrov.lab6.transactions.Account;
 
 import static org.junit.jupiter.api.Assertions.*;
 

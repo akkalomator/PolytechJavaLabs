@@ -1,18 +1,16 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.transactions.managers;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import ru.petrov.lab6.transactions.Account;
+import ru.petrov.lab6.transactions.Transaction;
+import ru.petrov.lab6.transactions.managers.SynchronousTransactionManager;
+import ru.petrov.lab6.utils.XMLTransactionsLoader;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

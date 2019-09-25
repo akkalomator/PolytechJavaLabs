@@ -1,6 +1,10 @@
 package ru.petrov.lab6;
 
 import org.xml.sax.SAXException;
+import ru.petrov.lab6.transactions.Account;
+import ru.petrov.lab6.transactions.Transaction;
+import ru.petrov.lab6.transactions.managers.AsynchronousTransactionManager;
+import ru.petrov.lab6.utils.XMLTransactionsLoader;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;

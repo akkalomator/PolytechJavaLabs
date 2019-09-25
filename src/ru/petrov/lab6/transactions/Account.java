@@ -1,4 +1,4 @@
-package ru.petrov.lab6;
+package ru.petrov.lab6.transactions;
 
 import ru.petrov.lab6.exceptions.NotEnoughMoneyException;
 
