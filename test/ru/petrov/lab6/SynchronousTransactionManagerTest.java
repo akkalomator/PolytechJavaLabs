@@ -55,16 +55,15 @@ class SynchronousTransactionManagerTest {
         }
     }
 
-
     @Test
     public void completeTransactions_WorksCorrectly() {
 
         SynchronousTransactionManager stm = new SynchronousTransactionManager(transactions);
         stm.completeTransactions();
 
-        assertEquals(59, accounts.get(0).getAmount());
-        assertEquals(274, accounts.get(1).getAmount());
-        assertEquals(267, accounts.get(2).getAmount());
+        assertEquals(130, accounts.get(0).getAmount());
+        assertEquals(222, accounts.get(1).getAmount());
+        assertEquals(248, accounts.get(2).getAmount());
     }
 
 }
