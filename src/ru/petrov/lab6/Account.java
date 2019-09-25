@@ -2,6 +2,8 @@ package ru.petrov.lab6;
 
 import ru.petrov.lab6.exceptions.NotEnoughMoneyException;
 
+import java.util.Objects;
+
 public class Account {
 
     private final int id;
@@ -23,14 +25,27 @@ public class Account {
         return amount;
     }
 
-    void changeAmount(int amount) {
+    synchronized void changeAmount(int amount) {
         if (this.amount + amount < 0) {
             throw new NotEnoughMoneyException("Not enough money to complete transaction");
         }
         this.amount += amount;
     }
 
-    boolean haveEnoughMoney(int amount) {
+    synchronized boolean haveEnoughMoney(int amount) {
         return this.amount >= amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return id == account.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

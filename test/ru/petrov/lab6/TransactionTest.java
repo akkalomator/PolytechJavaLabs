@@ -30,6 +30,13 @@ class TransactionTest {
     }
 
     @Test
+    public void completeTransaction_ThrowsOnTransactionHasAlreadyBeenCompleted() {
+        Transaction transaction = new Transaction(0, account1, account2, 10);
+        transaction.completeTransaction();
+        assertThrows(TransactionFailedException.class, transaction::completeTransaction);
+    }
+
+    @Test
     public void completeTransaction_ThrowsOnUnableToMakeTransaction() {
         Transaction transaction = new Transaction(0, account1, account2, 500);
         assertThrows(TransactionFailedException.class, transaction::completeTransaction);

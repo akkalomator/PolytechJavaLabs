@@ -14,7 +14,7 @@ public class DataGenerator {
         Random r = new Random();
         FileWriter writer = new FileWriter("resources/lab6/data.xml");
         writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<transactions>\n"
+            "<transactions count=\"" + TRANSACTION_NUMBER +"\">\n"
         );
 
         for (int i = 0; i < TRANSACTION_NUMBER; i++) {
