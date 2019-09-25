@@ -18,11 +18,17 @@ public class DataGenerator {
         );
 
         for (int i = 0; i < TRANSACTION_NUMBER; i++) {
+            int from;
+            int to;
+            do {
+                from = r.nextInt(USERS_NUMBER);
+                to = r.nextInt(USERS_NUMBER);
+            } while (from == to);
             writer.write(String.format(
                 "\t<transaction id=\"%d\" from=\"%d\" to=\"%d\" amount=\"%d\" />\n",
                 i,
-                r.nextInt(USERS_NUMBER),
-                r.nextInt(USERS_NUMBER),
+                from,
+                to,
                 r.nextInt(MAX_SUM)
             ));
         }
