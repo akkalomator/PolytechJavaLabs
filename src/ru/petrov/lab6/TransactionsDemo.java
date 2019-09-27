@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class TransactionsDemo {
 
-    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+    public static void main(String[] args) {
 
         Map<Integer, Account> accounts = new HashMap<>();
         for (int i = 0; i < 100; i++) {
@@ -24,9 +24,12 @@ public class TransactionsDemo {
 
         XMLTransactionsLoader loader = new XMLTransactionsLoader();
         File input = new File("resources/lab6/data.xml");
-        List<Transaction> transactions = loader.load(input, accounts);
-
-        AsynchronousTransactionManager stm = new AsynchronousTransactionManager(transactions);
-        stm.completeTransactions();
+        try {
+            List<Transaction> transactions = loader.load(input, accounts);
+            AsynchronousTransactionManager stm = new AsynchronousTransactionManager(transactions);
+            stm.completeTransactions();
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
     }
 }

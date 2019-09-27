@@ -10,30 +10,35 @@ public class DataGenerator {
     private static final int USERS_NUMBER = 10;
     private static final int MAX_SUM = 50000;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Random r = new Random();
-        FileWriter writer = new FileWriter("resources/lab6/data.xml");
-        writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<transactions count=\"" + TRANSACTION_NUMBER +"\">\n"
-        );
+        try {
+            FileWriter writer = new FileWriter("resources/lab6/data.xml");
 
-        for (int i = 0; i < TRANSACTION_NUMBER; i++) {
-            int from;
-            int to;
-            do {
-                from = r.nextInt(USERS_NUMBER);
-                to = r.nextInt(USERS_NUMBER);
-            } while (from == to);
-            writer.write(String.format(
-                "\t<transaction id=\"%d\" from=\"%d\" to=\"%d\" amount=\"%d\" />\n",
-                i,
-                from,
-                to,
-                r.nextInt(MAX_SUM)
-            ));
+            writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<transactions count=\"" + TRANSACTION_NUMBER + "\">\n"
+            );
+
+            for (int i = 0; i < TRANSACTION_NUMBER; i++) {
+                int from;
+                int to;
+                do {
+                    from = r.nextInt(USERS_NUMBER);
+                    to = r.nextInt(USERS_NUMBER);
+                } while (from == to);
+                writer.write(String.format(
+                    "\t<transaction id=\"%d\" from=\"%d\" to=\"%d\" amount=\"%d\" />\n",
+                    i,
+                    from,
+                    to,
+                    r.nextInt(MAX_SUM)
+                ));
+            }
+
+            writer.write("</transactions>");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        writer.write("</transactions>");
-        writer.close();
     }
 }

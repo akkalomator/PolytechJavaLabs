@@ -8,12 +8,16 @@ import ru.petrov.lab4.utils.io.Writer;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Reader reader = new Reader(System.in);
         Writer writer = new Writer(System.out);
-        ExplorerProvider explorerProvider = new ExplorerProvider((new Explorer("")));
-        Controller app = new Controller(reader, writer, explorerProvider);
-        app.run();
+        try {
+            ExplorerProvider explorerProvider = new ExplorerProvider((new Explorer("")));
+            Controller app = new Controller(reader, writer, explorerProvider);
+            app.run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
