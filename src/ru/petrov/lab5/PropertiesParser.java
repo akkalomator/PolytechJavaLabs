@@ -139,7 +139,7 @@ public class PropertiesParser {
         String symbol = builder.substring(i, i + 4);
         short sh;
         try {
-            sh = Short.valueOf(symbol);
+            sh = Short.parseShort(symbol);
         } catch (NumberFormatException e) {
             throw new ParseException("Invalid ASCII symbol: " + symbol, i);
         }

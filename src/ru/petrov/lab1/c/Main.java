@@ -39,7 +39,7 @@ public class Main implements AutoCloseable {
             do {
                 try {
                     String s = sc.nextLine();
-                    option = Integer.valueOf(s);
+                    option = Integer.parseInt(s);
                 }
                 catch (NumberFormatException e) {
                     System.out.println("Type option correctly");
@@ -86,7 +86,7 @@ public class Main implements AutoCloseable {
                 new Book(
                     tokens[0],
                     tokens[1],
-                    Integer.valueOf(tokens[2]
+                    Integer.parseInt(tokens[2]
                     )
                 )
             );
@@ -120,7 +120,7 @@ public class Main implements AutoCloseable {
                 if (str.equalsIgnoreCase("-")) {
                     break;
                 }
-                year = Integer.valueOf(str);
+                year = Integer.parseInt(str);
                 isCorrect = true;
                 isYearRequired = true;
             } catch (NumberFormatException e) {
@@ -192,7 +192,7 @@ public class Main implements AutoCloseable {
             bookToChange = new Book(
                 tokensOfBookToChange[0],
                 tokensOfBookToChange[1],
-                Integer.valueOf(tokensOfBookToChange[2])
+                Integer.parseInt(tokensOfBookToChange[2])
             );
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -235,7 +235,7 @@ public class Main implements AutoCloseable {
                 break;
             }
             case "year": {
-                shelf.updateYear(bookToChange, Integer.valueOf(replacement));
+                shelf.updateYear(bookToChange, Integer.parseInt(replacement));
                 break;
             }
         }
@@ -248,7 +248,7 @@ public class Main implements AutoCloseable {
         if (tokens == null) {
             return;
         }
-        shelf.deleteBook(new Book(tokens[0], tokens[1], Integer.valueOf(tokens[2])));
+        shelf.deleteBook(new Book(tokens[0], tokens[1], Integer.parseInt(tokens[2])));
     }
 
     private static String[] getBookTokens() {
