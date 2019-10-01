@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReverseTest {
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdef");
         Reverse command = new Reverse(builder);
         command.execute();
@@ -15,7 +15,7 @@ class ReverseTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdef");
         Reverse command = new Reverse(builder);
         command.execute();

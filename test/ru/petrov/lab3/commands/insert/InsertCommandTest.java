@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class InsertCommandTest {
 
     @Test
-    public void execute_worksCorrectly() {
+    void execute_worksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdef");
         StringBuilder control = new StringBuilder("abcdef");
 
@@ -54,7 +54,7 @@ class InsertCommandTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdef");
 
         InsertCommand<Boolean> booleanInsertCommand = new InsertCommand<>(builder, 3, true);

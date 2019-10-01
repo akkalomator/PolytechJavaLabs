@@ -16,11 +16,7 @@ public class InsertCharArray extends AbstractInsert {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         builder.insert(index, str, offset, len);
-
-        super.afterExecuted();
     }
 }

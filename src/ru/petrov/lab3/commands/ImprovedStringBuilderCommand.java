@@ -17,20 +17,20 @@ public abstract class ImprovedStringBuilderCommand {
         if (isExecuted) {
             throw new IllegalStateException("Command has already been executed");
         }
-    }
-
-    protected void afterExecuted() {
+        executeCommand();
         isExecuted = true;
     }
+
+    protected abstract void executeCommand();
 
     public void unExecute() {
         if (!isExecuted) {
             throw new IllegalStateException("Command has not been executed yet or has already been unexecuted");
         }
-    }
-
-    protected void afterUnexecuted() {
+        unExecuteCommand();
         isExecuted = false;
     }
+
+    protected abstract void unExecuteCommand();
 }
 

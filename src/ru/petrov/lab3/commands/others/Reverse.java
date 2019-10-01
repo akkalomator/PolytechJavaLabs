@@ -9,16 +9,12 @@ public class Reverse extends ImprovedStringBuilderCommand {
     }
 
     @Override
-    public void execute() {
-        super.execute();
+    protected void executeCommand() {
         builder.reverse();
-        super.afterExecuted();
     }
 
     @Override
-    public void unExecute() {
-        super.unExecute();
+    protected void unExecuteCommand() {
         builder.reverse();
-        super.afterUnexecuted();
     }
 }

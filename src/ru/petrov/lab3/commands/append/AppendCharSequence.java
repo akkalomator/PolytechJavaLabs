@@ -14,11 +14,7 @@ public class AppendCharSequence extends AbstractAppend {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         builder.append(seq, start, end);
-
-        super.afterExecuted();
     }
 }

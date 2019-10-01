@@ -10,6 +10,7 @@ import ru.petrov.lab3.commands.insert.InsertCharArray;
 import ru.petrov.lab3.commands.insert.InsertCharSequence;
 import ru.petrov.lab3.commands.insert.InsertCommand;
 import ru.petrov.lab3.commands.others.Replace;
+import ru.petrov.lab3.commands.others.Reverse;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -260,7 +261,9 @@ public class ImprovedStringBuilder implements Comparable<ImprovedStringBuilder>,
     }
 
     public ImprovedStringBuilder reverse() {
-        stringBuilder.reverse();
+        Reverse command = new Reverse(stringBuilder);
+        command.execute();
+        commands.push(command);
         return this;
     }
 

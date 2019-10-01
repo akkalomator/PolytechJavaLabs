@@ -6,9 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InsertCharSequenceTest {
 
-
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         int offset = 3;
         CharSequence str = "qwerty";
@@ -21,7 +20,7 @@ class InsertCharSequenceTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         CharSequence str = "qwerty";
         int offset = 3;
@@ -32,5 +31,4 @@ class InsertCharSequenceTest {
         command.unExecute();
         assertEquals("abcdefghijklm", builder.toString());
     }
-
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InsertCharArrayTest {
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         int index = 5;
         char[] str = {'q', 'w', 'e', 'r', 't', 'y'};
@@ -20,7 +20,7 @@ class InsertCharArrayTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         int index = 5;
         char[] str = {'q', 'w', 'e', 'r', 't', 'y'};

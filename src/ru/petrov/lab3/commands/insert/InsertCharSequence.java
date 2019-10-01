@@ -16,11 +16,7 @@ public class InsertCharSequence extends AbstractInsert {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         builder.insert(dstOffset, seq, start, end);
-
-        super.afterExecuted();
     }
 }

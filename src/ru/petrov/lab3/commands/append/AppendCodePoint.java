@@ -10,9 +10,7 @@ public class AppendCodePoint extends AbstractAppend {
     }
 
     @Override
-    public void execute() {
-        super.execute();
+    protected void executeCommand() {
         builder.appendCodePoint(codePoint);
-        super.afterExecuted();
     }
 }

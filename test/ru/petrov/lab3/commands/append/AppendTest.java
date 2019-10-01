@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppendTest {
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abc");
 
         Append<Boolean> booleanAppend = new Append<>(builder, true);
@@ -49,7 +49,7 @@ class AppendTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abc");
         Append<Boolean> command = new Append<>(builder, true);
         command.execute();

@@ -7,9 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class AbstractAppendTest {
 
     @Test
-    public void constructor_ThrowsOnWordLengthLessThanZero() {
+    void constructor_ThrowsOnWordLengthLessThanZero() {
         StringBuilder builder = new StringBuilder();
-        assertThrows(IllegalArgumentException.class, () -> new AbstractAppend(builder, -1) {});
+        assertThrows(IllegalArgumentException.class, () -> new AbstractAppend(builder, -1) {
+            @Override
+            protected void executeCommand() {
+
+            }
+        });
     }
 
 }

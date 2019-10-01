@@ -6,7 +6,7 @@ public abstract class AbstractAppend extends ImprovedStringBuilderCommand {
 
     private final int wordLength;
 
-    protected AbstractAppend(StringBuilder builder, int wordLength) {
+    AbstractAppend(StringBuilder builder, int wordLength) {
         super(builder);
         if (wordLength < 0) {
             throw new IllegalArgumentException("Word length must be greater than 0 or equal to it");
@@ -15,9 +15,7 @@ public abstract class AbstractAppend extends ImprovedStringBuilderCommand {
     }
 
     @Override
-    public void unExecute() {
-        super.unExecute();
+    protected void unExecuteCommand() {
         builder.delete(builder.length() - wordLength, builder.length());
-        super.afterUnexecuted();
     }
 }

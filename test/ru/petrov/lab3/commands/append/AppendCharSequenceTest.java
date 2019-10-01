@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppendCharSequenceTest {
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         CharSequence str = "qwerty";
         int start = 2;
@@ -19,7 +19,7 @@ class AppendCharSequenceTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         CharSequence str = "qwerty";
         int start = 2;
@@ -29,5 +29,4 @@ class AppendCharSequenceTest {
         command.unExecute();
         assertEquals("abcdefghijklm", builder.toString());
     }
-
 }

@@ -20,19 +20,13 @@ public class Replace extends ImprovedStringBuilderCommand {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         replaced = builder.substring(start, end);
         builder.replace(start, end, str);
-
-        super.afterExecuted();
     }
 
     @Override
-    public void unExecute() {
-        super.unExecute();
+    protected void unExecuteCommand() {
         builder.replace(start, start + str.length(), replaced);
-        super.afterUnexecuted();
     }
 }

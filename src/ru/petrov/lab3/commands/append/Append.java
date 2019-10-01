@@ -15,9 +15,7 @@ public class Append<T> extends AbstractAppend {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         if (type == Boolean.class) {
             builder.append((boolean) item);
         } else if (type == Character.class) {
@@ -37,7 +35,5 @@ public class Append<T> extends AbstractAppend {
         } else {
             builder.append(item);
         }
-
-        super.afterExecuted();
     }
 }

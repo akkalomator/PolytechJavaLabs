@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppendCharArrayTest {
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         char[] str = {'q', 'w', 'e', 'r', 't', 'y'};
         int offset = 2;
@@ -19,7 +19,7 @@ class AppendCharArrayTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefghijklm");
         char[] str = {'q', 'w', 'e', 'r', 't', 'y'};
         int offset = 2;

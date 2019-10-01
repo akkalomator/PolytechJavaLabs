@@ -16,9 +16,7 @@ public class InsertCommand<T> extends AbstractInsert {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         if (type == Boolean.class) {
             builder.insert(offset, (boolean) item);
         } else if (type == Character.class) {
@@ -38,7 +36,5 @@ public class InsertCommand<T> extends AbstractInsert {
         } else {
             builder.insert(offset, item);
         }
-
-        super.afterExecuted();
     }
 }

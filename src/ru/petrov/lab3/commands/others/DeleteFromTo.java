@@ -18,25 +18,17 @@ public class DeleteFromTo extends ImprovedStringBuilderCommand {
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
+    protected void executeCommand() {
         deleted = builder.substring(start, end);
         if (end - start > 1) {
             builder.delete(start, end);
         } else if (end - start == 1) {
             builder.deleteCharAt(start);
         }
-
-        super.afterExecuted();
     }
 
     @Override
-    public void unExecute() {
-        super.unExecute();
-
+    protected void unExecuteCommand() {
         builder.insert(start, deleted);
-
-        super.afterUnexecuted();
     }
 }

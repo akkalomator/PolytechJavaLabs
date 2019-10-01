@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DeleteFromToTest {
 
     @Test
-    public void constructor_ThrowsOnStartIndexGreaterThanEndIndex() {
+    void constructor_ThrowsOnStartIndexGreaterThanEndIndex() {
         assertThrows(IndexOutOfBoundsException.class, () -> new DeleteFromTo(new StringBuilder(), 4, 3));
     }
 
     @Test
-    public void execute_WorksCorrectly() {
+    void execute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefgh");
         DeleteFromTo command = new DeleteFromTo(builder, 2, 5);
         command.execute();
@@ -33,7 +33,7 @@ class DeleteFromToTest {
     }
 
     @Test
-    public void unexecute_WorksCorrectly() {
+    void unexecute_WorksCorrectly() {
         StringBuilder builder = new StringBuilder("abcdefgh");
         DeleteFromTo command = new DeleteFromTo(builder, 2, 5);
         command.execute();
