@@ -24,14 +24,14 @@ public class XMLTransactionsLoader {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         Document doc = builder.parse(file);
-        int count = Integer.valueOf(((Element) doc.getFirstChild()).getAttribute("count"));
+        int count = Integer.parseInt(((Element) doc.getFirstChild()).getAttribute("count"));
         NodeList nodes = doc.getElementsByTagName("transaction");
         for (int i = 0; i < count; i++) {
             Element el = (Element) nodes.item(i);
-            int id = Integer.valueOf(el.getAttribute("id"));
-            int from = Integer.valueOf(el.getAttribute("from"));
-            int to = Integer.valueOf(el.getAttribute("to"));
-            int amount = Integer.valueOf(el.getAttribute("amount"));
+            int id = Integer.parseInt(el.getAttribute("id"));
+            int from = Integer.parseInt(el.getAttribute("from"));
+            int to = Integer.parseInt(el.getAttribute("to"));
+            int amount = Integer.parseInt(el.getAttribute("amount"));
             transactions.add(
                 new Transaction(
                     id,
