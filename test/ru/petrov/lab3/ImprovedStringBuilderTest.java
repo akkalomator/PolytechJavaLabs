@@ -175,7 +175,7 @@ class ImprovedStringBuilderTest {
     }
 
     @Test
-    public void undo_ThrowsWhenNothingToUndo() {
+    void undo_ThrowsWhenNothingToUndo() {
         ImprovedStringBuilder improvedStringBuilder = new ImprovedStringBuilder();
         assertThrows(IllegalStateException.class, improvedStringBuilder::undo);
 
@@ -185,7 +185,7 @@ class ImprovedStringBuilderTest {
     }
 
     @Test
-    public void undo_WorksCorrectly() {
+    void undo_WorksCorrectly() {
         ImprovedStringBuilder improvedStringBuilder = new ImprovedStringBuilder();
 
         String str = "sdfdsf";
@@ -196,6 +196,5 @@ class ImprovedStringBuilderTest {
         improvedStringBuilder.insert(2, "adasd");
         improvedStringBuilder.undo();
         assertEquals(str, improvedStringBuilder.toString());
-
     }
 }

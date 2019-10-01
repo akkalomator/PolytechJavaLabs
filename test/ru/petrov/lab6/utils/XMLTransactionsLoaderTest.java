@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import ru.petrov.lab6.transactions.Account;
 import ru.petrov.lab6.transactions.Transaction;
-import ru.petrov.lab6.utils.XMLTransactionsLoader;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -12,12 +11,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class XMLTransactionsLoaderTest {
 
     @Test
-    public void load_WorksCorrectly() throws IOException, SAXException, ParserConfigurationException {
+    void load_WorksCorrectly() throws IOException, SAXException, ParserConfigurationException {
         XMLTransactionsLoader loader = new XMLTransactionsLoader();
         File file = new File("resources/lab6/veryLittleData.xml");
         Map<Integer, Account> accounts = Map.of(

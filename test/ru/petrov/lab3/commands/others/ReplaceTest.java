@@ -30,5 +30,4 @@ class ReplaceTest {
         command.unExecute();
         assertEquals("abcdef", builder.toString());
     }
-
 }

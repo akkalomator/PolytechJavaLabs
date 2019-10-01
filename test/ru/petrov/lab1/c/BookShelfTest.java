@@ -13,9 +13,8 @@ class BookShelfTest {
     private static List<Book> books;
     private static BookShelf shelf;
 
-
     @BeforeEach
-    public void createShelf() {
+    void createShelf() {
         books = List.of(
             new Book("author1", "name1", 2000),
             new Book("author1", "name2", 2050),
@@ -32,7 +31,7 @@ class BookShelfTest {
     }
 
     @Test
-    public void getAllBooks_WorksCorrectly() {
+    void getAllBooks_WorksCorrectly() {
         assertEquals(
             books,
             shelf.getAllBooks()
@@ -40,12 +39,12 @@ class BookShelfTest {
     }
 
     @Test
-    public void addBook_ThrowsWhenBookIsNull() {
+    void addBook_ThrowsWhenBookIsNull() {
         assertThrows(IllegalArgumentException.class, () -> shelf.addBook(null));
     }
 
     @Test
-    public void addBook_WorksCorrectly() {
+    void addBook_WorksCorrectly() {
         Book book = new Book("author4", "name5", 2001);
         shelf.addBook(book);
         assertTrue(shelf.getAllBooks().contains(book));
@@ -53,22 +52,22 @@ class BookShelfTest {
     }
 
     @Test
-    public void getById_ThrowsOnNoSuchId() {
+    void getById_ThrowsOnNoSuchId() {
         assertThrows(IllegalArgumentException.class, () -> shelf.getById(999));
     }
 
     @Test
-    public void getById_WorksCorrectly() {
+    void getById_WorksCorrectly() {
         assertEquals(books.get(0), shelf.getById(0));
     }
 
     @Test
-    public void getAllWhere_ReturnsEmptyListWhenNothingFound() {
+    void getAllWhere_ReturnsEmptyListWhenNothingFound() {
         assertEquals(List.of(), shelf.getAllWhere((book -> book.getAuthor().equals("non existent"))));
     }
 
     @Test
-    public void getAllWhere_WorksCorrectly() {
+    void getAllWhere_WorksCorrectly() {
         assertEquals(List.of(books.get(0), books.get(1)), shelf.getAllWhere(book -> book.getAuthor().equals("author1")));
         assertEquals(List.of(books.get(0), books.get(3)), shelf.getAllWhere(book -> book.getName().equals("name1")));
         assertEquals(List.of(books.get(0), books.get(4), books.get(5)), shelf.getAllWhere(book -> book.getYear() == 2000));
@@ -76,14 +75,14 @@ class BookShelfTest {
     }
 
     @Test
-    public void updateAuthor_ThrowsOnNoSuchBook() {
+    void updateAuthor_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
         assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(nonExistent, "234"));
         assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(999, "234"));
     }
 
     @Test
-    public void updateAuthor_WorksCorrectly() {
+    void updateAuthor_WorksCorrectly() {
         String newAuthor1 = "newAuthor1";
         Book bookToChange1 = books.get(0);
         shelf.updateAuthor(bookToChange1, newAuthor1);
@@ -96,14 +95,14 @@ class BookShelfTest {
     }
 
     @Test
-    public void updateName_ThrowsOnNoSuchBook() {
+    void updateName_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
         assertThrows(NoSuchElementException.class, () -> shelf.updateName(nonExistent, "234"));
         assertThrows(NoSuchElementException.class, () -> shelf.updateAuthor(999, "234"));
     }
 
     @Test
-    public void updateName_WorksCorrectly() {
+    void updateName_WorksCorrectly() {
         String newName1 = "newName1";
         Book bookToChange1 = books.get(0);
         shelf.updateName(bookToChange1, newName1);
@@ -116,14 +115,14 @@ class BookShelfTest {
     }
 
     @Test
-    public void updateYear_ThrowsOnNoSuchBook() {
+    void updateYear_ThrowsOnNoSuchBook() {
         Book nonExistent = new Book("non existent", "non existent", 0);
         assertThrows(NoSuchElementException.class, () -> shelf.updateYear(nonExistent, 0));
         assertThrows(NoSuchElementException.class, () -> shelf.updateYear(999, 0));
     }
 
     @Test
-    public void updateYear_WorksCorrectly() {
+    void updateYear_WorksCorrectly() {
         int newYear1 = 2001;
         Book bookToChange1 = books.get(0);
         shelf.updateYear(bookToChange1, newYear1);
@@ -136,22 +135,19 @@ class BookShelfTest {
     }
 
     @Test
-    public void deleteAllBooks_WorksCorrectly() {
-
+    void deleteAllBooks_WorksCorrectly() {
         shelf.deleteAllBooks();
         assertEquals(List.of(), shelf.getAllBooks());
     }
 
     @Test
-    public void deleteBook_ThrowsOnNoSuchBookFound() {
-
+    void deleteBook_ThrowsOnNoSuchBookFound() {
         Book nonExistent = new Book("non existent", "non existent", 0);
         assertThrows(NoSuchElementException.class, () -> shelf.deleteBook(nonExistent));
     }
 
     @Test
-    public void deleteBook_WorksCorrectly() {
-
+    void deleteBook_WorksCorrectly() {
         Book bookToDelete1 = books.get(0);
         shelf.deleteBook(bookToDelete1);
         assertFalse(shelf.getAllBooks().contains(bookToDelete1));
@@ -162,13 +158,12 @@ class BookShelfTest {
     }
 
     @Test
-    public void deleteById_ThrowsOnNoSuchBookFound() {
+    void deleteById_ThrowsOnNoSuchBookFound() {
         assertThrows(NoSuchElementException.class, () -> shelf.deleteById(999));
     }
 
     @Test
-    public void deleteById_WorksCorrectly() {
-
+    void deleteById_WorksCorrectly() {
         int id1 = 0;
         Book bookToDelete1 = books.get(id1);
         shelf.deleteById(id1);
@@ -181,15 +176,13 @@ class BookShelfTest {
     }
 
     @Test
-    public void deleteAllWhere_doesNothingWhenPredicateDontMatch() {
-
+    void deleteAllWhere_doesNothingWhenPredicateDontMatch() {
         shelf.deleteAllWhere(book -> book.getAuthor().equals("non existent"));
         assertEquals(books, shelf.getAllBooks());
     }
 
     @Test
-    public void deleteAllWhere_WorksCorrectly() {
-
+    void deleteAllWhere_WorksCorrectly() {
         shelf.deleteAllWhere(book -> book.getAuthor().equals("author1"));
         assertEquals(
             List.of(
@@ -201,5 +194,4 @@ class BookShelfTest {
             shelf.getAllBooks()
         );
     }
-
 }

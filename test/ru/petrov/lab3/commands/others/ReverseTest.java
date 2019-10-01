@@ -22,5 +22,4 @@ class ReverseTest {
         command.unExecute();
         assertEquals("abcdef", builder.toString());
     }
-
 }

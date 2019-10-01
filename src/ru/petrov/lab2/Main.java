@@ -62,15 +62,15 @@ public class Main {
             try {
                 switch (tokens[0]) {
                     case "Herbivorous": {
-                        result.add(new Herbivorous(tokens[1], Integer.valueOf(tokens[2])));
+                        result.add(new Herbivorous(tokens[1], Integer.parseInt(tokens[2])));
                         break;
                     }
                     case "Carnivore": {
-                        result.add(new Carnivore(tokens[1], Integer.valueOf(tokens[2])));
+                        result.add(new Carnivore(tokens[1], Integer.parseInt(tokens[2])));
                         break;
                     }
                     case "Omnivorous": {
-                        result.add(new Omnivorous(tokens[1], Integer.valueOf(tokens[2])));
+                        result.add(new Omnivorous(tokens[1], Integer.parseInt(tokens[2])));
                         break;
                     }
                     default: {
