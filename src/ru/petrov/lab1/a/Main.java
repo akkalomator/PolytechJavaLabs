@@ -11,6 +11,7 @@ public class Main {
 
             if (rowsCount == 0 || columnsCount == 0) {
                 System.err.println("RowCount or column count cannot be zero");
+                return;
             }
 
             int[][] matrix = new int[rowsCount][columnsCount];
