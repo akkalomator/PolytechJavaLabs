@@ -12,7 +12,6 @@ class AbstractInsertTest {
         assertThrows(IllegalArgumentException.class, ()-> new AbstractInsert(builder, 5, -1) {
             @Override
             protected void executeCommand() {
-
             }
         });
     }

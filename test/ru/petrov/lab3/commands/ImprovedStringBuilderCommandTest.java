@@ -43,7 +43,7 @@ class ImprovedStringBuilderCommandTest {
     }
 
     @Test
-    public void unExecute_ThrowsWhenAlreadyBeenUnexecuted() {
+    void unExecute_ThrowsWhenAlreadyBeenUnexecuted() {
         StringBuilder builder = new StringBuilder("abc");
         ImprovedStringBuilderCommand command = new ImprovedStringBuilderCommandImpl(builder);
         command.execute();

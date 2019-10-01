@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class StringSplitter {
+
     public static List<String> splitAndReplace(String s, int groupLength, int replaceIndex) {
 
         if (s == null) {
@@ -41,7 +42,7 @@ public class StringSplitter {
         return splitted;
     }
 
-    public static List<String> labTask(String s) {
+    static List<String> labTask(String s) {
         List<String> strings = splitAndReplace(s, 3, 1);
         strings.sort(String::compareTo);
         return strings;

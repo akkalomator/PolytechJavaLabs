@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class XMLTransactionsLoaderTest {
 
     @Test
-    public void load_WorksCorrectly() throws IOException, SAXException, ParserConfigurationException {
+    void load_WorksCorrectly() throws IOException, SAXException, ParserConfigurationException {
         XMLTransactionsLoader loader = new XMLTransactionsLoader();
         File file = new File("resources/lab6/veryLittleData.xml");
         Map<Integer, Account> accounts = Map.of(

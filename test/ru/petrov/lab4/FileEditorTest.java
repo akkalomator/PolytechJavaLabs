@@ -16,24 +16,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileEditorTest {
 
-    public static final String INITIAL_PATH = "resources/lab4";
+    private static final String INITIAL_PATH = "resources/lab4";
 
     @Test
-    public void openFile_ThrowsWhenFileDoesNotExists() throws Exception {
+    void openFile_ThrowsWhenFileDoesNotExists() throws Exception {
         try (FileEditor editor = new FileEditor(Path.of(INITIAL_PATH + "/c"))) {
             assertThrows(FileNotFoundException.class, editor::open);
         }
     }
 
     @Test
-    public void readContent_ThrowsOnEditorNotOpened() throws Exception {
+    void readContent_ThrowsOnEditorNotOpened() throws Exception {
         try (FileEditor editor = new FileEditor(Path.of(INITIAL_PATH + "/a/file2.file"))) {
             assertThrows(IllegalStateException.class, editor::readContent);
         }
     }
 
     @Test
-    public void readContent_WorksCorrectly() throws Exception {
+    void readContent_WorksCorrectly() throws Exception {
         List<String> expected = List.of(
             "1st line",
             "2nd line",
@@ -49,21 +49,21 @@ class FileEditorTest {
     }
 
     @Test
-    public void appendData_ThrowsOnEditorHasNotBeenOpened() throws Exception {
+    void appendData_ThrowsOnEditorHasNotBeenOpened() throws Exception {
         try (FileEditor editor = new FileEditor(Path.of(INITIAL_PATH + "/a/file2.file"))) {
             assertThrows(IllegalStateException.class, () -> editor.appendData("lol"));
         }
     }
 
     @Test
-    public void save_ThrowsOnEditorHasNotBeenOpened() throws Exception {
+    void save_ThrowsOnEditorHasNotBeenOpened() throws Exception {
         try (FileEditor editor = new FileEditor(Path.of(INITIAL_PATH + "/a/file2.file"))) {
             assertThrows(IllegalStateException.class, () -> editor.save(SaveMode.APPEND));
         }
     }
 
     @Test
-    public void appendData_and_save_WorksCorrectly() throws Exception {
+    void appendData_and_save_WorksCorrectly() throws Exception {
         String pathToFile = INITIAL_PATH + "/a/file1.file";
         Files.deleteIfExists(Path.of(pathToFile));
         Files.createFile(Path.of(pathToFile));

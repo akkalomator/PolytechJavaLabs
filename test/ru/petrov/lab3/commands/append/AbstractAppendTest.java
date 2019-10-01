@@ -12,9 +12,7 @@ class AbstractAppendTest {
         assertThrows(IllegalArgumentException.class, () -> new AbstractAppend(builder, -1) {
             @Override
             protected void executeCommand() {
-
             }
         });
     }
-
 }

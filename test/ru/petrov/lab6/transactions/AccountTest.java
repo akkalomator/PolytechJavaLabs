@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccountTest {
 
     @Test
-    public void constructor_ThrowsOnInitialMoneyLessThanZero() {
+    void constructor_ThrowsOnInitialMoneyLessThanZero() {
         assertThrows(IllegalArgumentException.class, () -> new Account(0, -1));
     }
 
     @Test
-    public void changeAmount_ThrowsOnResultingAmountLessThanZero() {
+    void changeAmount_ThrowsOnResultingAmountLessThanZero() {
         Account account = new Account(0, 50);
         assertThrows(NotEnoughMoneyException.class, () -> account.changeAmount(-100));
     }
 
     @Test
-    public void changeAmount_WorksCorrectly() {
+    void changeAmount_WorksCorrectly() {
         Account account = new Account(0, 100);
         account.changeAmount(50);
         assertEquals(150, account.getAmount());
@@ -30,7 +30,7 @@ class AccountTest {
     }
 
     @Test
-    public void haveEnoughMoney_WorksCorrectly() {
+    void haveEnoughMoney_WorksCorrectly() {
         Account account = new Account(0, 50);
         assertTrue(account.haveEnoughMoney(0));
         assertTrue(account.haveEnoughMoney(49));

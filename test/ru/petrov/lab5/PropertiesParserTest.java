@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PropertiesParserTest {
 
     @Test
-    public void parse_ThrowsOnMalformedInput() throws FileNotFoundException {
+    void parse_ThrowsOnMalformedInput() throws FileNotFoundException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/malformed1.properties"));
         assertThrows(ParseException.class, parser::parse);
 
@@ -25,7 +25,7 @@ class PropertiesParserTest {
     }
 
     @Test
-    public void parse_WorksCorrectly() throws IOException, ParseException {
+    void parse_WorksCorrectly() throws IOException, ParseException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         parser.parse();
         Map<String, String> resultProperties = parser.getProperties();
@@ -42,26 +42,26 @@ class PropertiesParserTest {
     }
 
     @Test
-    public void getProperties_ThrowsOnPropertiesHasNotBeenRead() throws FileNotFoundException {
+    void getProperties_ThrowsOnPropertiesHasNotBeenRead() throws FileNotFoundException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         assertThrows(IllegalStateException.class, parser::getProperties);
     }
 
     @Test
-    public void get_ThrowsOnPropertiesHasNotBeenRead() throws FileNotFoundException {
+    void get_ThrowsOnPropertiesHasNotBeenRead() throws FileNotFoundException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         assertThrows(IllegalStateException.class, () -> parser.get("tab"));
     }
 
     @Test
-    public void get_ThrowsOnNoSuchProperty() throws IOException, ParseException {
+    void get_ThrowsOnNoSuchProperty() throws IOException, ParseException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         parser.parse();
         assertThrows(IllegalArgumentException.class, () -> parser.get("non existent"));
     }
 
     @Test
-    public void get_WorksCorrectly() throws IOException, ParseException {
+    void get_WorksCorrectly() throws IOException, ParseException {
         PropertiesParser parser = new PropertiesParser(new FileInputStream("resources/lab5/prop.properties"));
         parser.parse();
         assertEquals("https://en.wikipedia.org/", parser.get("website"));

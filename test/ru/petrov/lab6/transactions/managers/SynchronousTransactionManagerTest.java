@@ -22,7 +22,7 @@ class SynchronousTransactionManagerTest {
     private static Map<Integer, Account> accounts;
 
     @BeforeAll
-    public static void loadTransactions() throws ParserConfigurationException, IOException, SAXException {
+    static void loadTransactions() throws ParserConfigurationException, IOException, SAXException {
         accounts = Map.of(
             0, new Account(0, 200),
             1, new Account(1, 150),
@@ -34,8 +34,7 @@ class SynchronousTransactionManagerTest {
     }
 
     @Test
-    public void completeTransactions_WorksCorrectly() {
-
+    void completeTransactions_WorksCorrectly() {
         SynchronousTransactionManager stm = new SynchronousTransactionManager(transactions);
         stm.completeTransactions();
 
@@ -43,5 +42,4 @@ class SynchronousTransactionManagerTest {
         assertEquals(222, accounts.get(1).getAmount());
         assertEquals(248, accounts.get(2).getAmount());
     }
-
 }
