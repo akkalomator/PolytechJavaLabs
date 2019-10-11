@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-public class MainMenuController implements Initializable {
+public class Lab1Controller implements Initializable {
 
     @FXML
     public TextField bookAuthorField;
@@ -67,7 +67,7 @@ public class MainMenuController implements Initializable {
         return authorMatches && nameMatches && yearMatches;
     });
 
-    public MainMenuController() {
+    public Lab1Controller() {
         shelf = new BookShelf();
     }
 
