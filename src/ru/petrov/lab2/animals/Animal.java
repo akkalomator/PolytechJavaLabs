@@ -30,11 +30,6 @@ public abstract class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
-            "id: " + id +
-            ", name: '" + name + '\'' +
-            ", food amount: " + foodAmount +
-            ", food type " + getFoodType() +
-            '}';
+        return name + " " + foodAmount;
     }
 }
