@@ -98,6 +98,7 @@ public class Lab2Controller implements Initializable {
             }
         });
         foodTypeComboBox.getItems().setAll(EnumSet.allOf(FoodType.class));
+        foodTypeComboBox.getSelectionModel().selectFirst();
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent) {
