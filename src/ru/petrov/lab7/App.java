@@ -27,6 +27,8 @@ public class App extends Application {
         TabPane gridPane = loader.load();
 
         Scene scene = new Scene(gridPane);
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(450);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

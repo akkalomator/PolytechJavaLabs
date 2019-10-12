@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane hgap="2.0" prefHeight="450.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.petrov.lab7.controllers.Lab3Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="3.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="45.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="12.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="3.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="66.0" minHeight="10.0" percentHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="53.0" minHeight="10.0" percentHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="53.0" minHeight="10.0" percentHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="36.0" minHeight="10.0" percentHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="53.0" minHeight="10.0" percentHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="35.0" minHeight="10.0" percentHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="154.0" minHeight="10.0" percentHeight="20.0" prefHeight="154.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="154.0" minHeight="10.0" percentHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="154.0" minHeight="10.0" percentHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <Label text="String Builder" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="CENTER"
+           GridPane.rowIndex="0" GridPane.valignment="CENTER">
+        <font>
+            <Font size="30.0"/>
+        </font>
+    </Label>
+    <TextArea fx:id="contentTextArea" disable="true" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1"
+              GridPane.rowIndex="1" GridPane.rowSpan="7">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextArea>
+    <TextField fx:id="appendTextField" prefWidth="200.0" promptText="Text" GridPane.columnIndex="2"
+               GridPane.columnSpan="3" GridPane.rowIndex="1"/>
+    <Button mnemonicParsing="false" text="Append" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"
+            onAction="#onAppendButtonClicked"/>
+    <TextField fx:id="insertTextTextField" prefWidth="200.0" promptText="Text" GridPane.columnIndex="2"
+               GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+    <TextField fx:id="insertOffsetTextField" prefWidth="200.0" promptText="Offset" GridPane.columnIndex="4"
+               GridPane.rowIndex="2" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <Button mnemonicParsing="false" text="Insert" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"
+            onAction="#onInsertButtonClicked"/>
+    <TextField fx:id="deleteIndexTextField" prefWidth="200.0" promptText="Index" GridPane.columnIndex="4"
+               GridPane.rowIndex="3" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onDeleteAtButtonClicked"/>
+    <TextField fx:id="deleteFromTextField" prefWidth="200.0" promptText="From" GridPane.columnIndex="3"
+               GridPane.rowIndex="4" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <TextField fx:id="deleteToTextField" prefWidth="200.0" promptText="To" GridPane.columnIndex="4"
+               GridPane.rowIndex="4" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onDeleteFromToButtonClicked"/>
+    <TextField fx:id="replaceTextTextField" prefWidth="200.0" promptText="Text" GridPane.columnIndex="2"
+               GridPane.rowIndex="5"/>
+    <TextField fx:id="replaceFromTextField" prefWidth="200.0" promptText="From" GridPane.columnIndex="3"
+               GridPane.rowIndex="5" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <TextField fx:id="replaceToTextField" prefWidth="200.0" promptText="To" GridPane.columnIndex="4"
+               GridPane.rowIndex="5" onKeyReleased="#onNumericFieldKeyReleased"/>
+    <Button mnemonicParsing="false" text="Replace" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onReplaceButtonClicked"/>
+    <Button mnemonicParsing="false" text="Reverse" GridPane.columnIndex="4" GridPane.halignment="RIGHT"
+            GridPane.rowIndex="7" GridPane.valignment="CENTER" onAction="#onReverseButtonCLicked"/>
+    <Button mnemonicParsing="false" text="Undo" GridPane.columnIndex="5" GridPane.halignment="RIGHT"
+            GridPane.rowIndex="7" GridPane.valignment="CENTER" onAction="#onUndoButtonClicked"/>
+</GridPane>
