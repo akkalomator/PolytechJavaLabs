@@ -16,6 +16,7 @@ import ru.petrov.lab2.animals.Carnivore;
 import ru.petrov.lab2.animals.FoodType;
 import ru.petrov.lab2.animals.Herbivorous;
 import ru.petrov.lab2.animals.Omnivorous;
+import ru.petrov.lab7.utils.DialogManager;
 
 import java.io.File;
 import java.io.FileReader;
@@ -107,12 +108,19 @@ public class Lab2Controller implements Initializable {
 
         String name = nameField.getText();
         if (name.isBlank()) {
-            showErrorDialog("Name is not valid", "Name can not be \"\"");
+            DialogManager.showDialog(
+                "Name is not valid",
+                "Name can not be \"\"",
+                Alert.AlertType.ERROR
+            );
             return;
         }
         String foodAmountStr = foodAmountField.getText();
         if (!foodAmountStr.matches("(\\d)+")) {
-            showErrorDialog("Food amount is not valid", "Food amount can not be " + foodAmountStr);
+            DialogManager.showDialog(
+                "Food amount is not valid",
+                "Food amount can not be " + foodAmountStr,
+                Alert.AlertType.ERROR);
             return;
         }
 
@@ -133,13 +141,6 @@ public class Lab2Controller implements Initializable {
 
         animals.add(animal);
         animalsTable.getItems().add(animal);
-    }
-
-    private void showErrorDialog(String title, String content) {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setHeaderText(title);
-        errorAlert.setContentText(content);
-        errorAlert.showAndWait();
     }
 
     public void onAButtonClicked(ActionEvent actionEvent) {
@@ -192,7 +193,11 @@ public class Lab2Controller implements Initializable {
             animals = ru.petrov.lab2.Main.readFromFile(fr);
             animalsTable.getItems().setAll(animals);
         } catch (IOException e) {
-            showErrorDialog("Reading error", "Cannot read from file \"" + pathField.getText() + "\".\n" + e.getMessage());
+            DialogManager.showDialog(
+                "Reading error",
+                "Cannot read from file \"" + pathField.getText() + "\".\n" + e.getMessage(),
+                Alert.AlertType.ERROR
+            );
         }
     }
 
@@ -205,7 +210,11 @@ public class Lab2Controller implements Initializable {
         try {
             ru.petrov.lab2.Main.writeTo(pathField.getText(), builder.toString());
         } catch (IOException e) {
-            showErrorDialog("Writing error", "Cannot write to file \"" + pathField.getText() + "\".\n" + e.getMessage());
+            DialogManager.showDialog(
+                "Writing error",
+                "Cannot write to file \"" + pathField.getText() + "\".\n" + e.getMessage(),
+                Alert.AlertType.ERROR
+            );
         }
     }
 }

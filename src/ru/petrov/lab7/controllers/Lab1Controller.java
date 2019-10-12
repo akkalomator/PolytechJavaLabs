@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import ru.petrov.lab1.c.Book;
 import ru.petrov.lab1.c.BookShelf;
+import ru.petrov.lab7.utils.DialogManager;
 
 import java.net.URL;
 import java.util.List;
@@ -73,7 +74,7 @@ public class Lab1Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        booksTable.setRowFactory(tv ->{
+        booksTable.setRowFactory(tv -> {
             TableRow<Book> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
@@ -96,19 +97,31 @@ public class Lab1Controller implements Initializable {
     public void onAddButtonClicked(ActionEvent actionEvent) {
         String author = bookAuthorField.getText();
         if (author.isBlank()) {
-            showErrorDialog("Author name is not valid", "Author name can not be \"\"");
+            DialogManager.showDialog(
+                "Author name is not valid",
+                "Author name can not be \"\"",
+                Alert.AlertType.ERROR
+            );
             return;
         }
         String name = bookNameField.getText();
         if (name.isBlank()) {
-            showErrorDialog("Book name is not valid", "Book name can not be \"\"");
+            DialogManager.showDialog(
+                "Book name is not valid",
+                "Book name can not be \"\"",
+                Alert.AlertType.ERROR
+            );
             return;
         }
         int year;
         try {
             year = Integer.parseInt(bookYearField.getText());
         } catch (NumberFormatException e) {
-            showErrorDialog("Book year is not valid", "Book year can not be \"" + bookYearField.getText() + "\"");
+            DialogManager.showDialog(
+                "Book year is not valid",
+                "Book year can not be \"" + bookYearField.getText() + "\"",
+                Alert.AlertType.ERROR
+            );
             return;
         }
         Book book = new Book(author, name, year);
@@ -116,19 +129,16 @@ public class Lab1Controller implements Initializable {
         booksTable.getItems().add(book);
     }
 
-    private void showErrorDialog(String title, String content) {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setHeaderText(title);
-        errorAlert.setContentText(content);
-        errorAlert.showAndWait();
-    }
-
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
         if (!bookYearField.getText().isBlank()) {
             try {
                 Integer.parseInt(bookYearField.getText());
             } catch (NumberFormatException e) {
-                showErrorDialog("Book year is not valid", "Book year can not be \"" + bookYearField.getText() + "\n");
+                DialogManager.showDialog(
+                    "Book year is not valid",
+                    "Book year can not be \"" + bookYearField.getText() + "\n",
+                    Alert.AlertType.ERROR
+                );
                 return;
             }
         }
@@ -145,7 +155,11 @@ public class Lab1Controller implements Initializable {
             try {
                 Integer.parseInt(bookYearField.getText());
             } catch (NumberFormatException e) {
-                showErrorDialog("Book year is not valid", "Book year can not be \"" + bookYearField.getText() + "\n");
+                DialogManager.showDialog(
+                    "Book year is not valid",
+                    "Book year can not be \"" + bookYearField.getText() + "\n",
+                    Alert.AlertType.ERROR
+                );
                 return;
             }
         }
