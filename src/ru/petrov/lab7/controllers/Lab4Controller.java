@@ -8,10 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -31,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -180,46 +183,38 @@ public class Lab4Controller implements Initializable {
     }
 
     private String askForDetails() {
-        FXMLLoader loader = new FXMLLoader();
-        GridPane gridPane;
-        try {
-            loader.setLocation(new File("resources/lab7/layout/simple-user-input.fxml").toURL());
-            gridPane = loader.load();
-        } catch (IOException e) {
-            DialogManager.showDialog(
-                "Something went wrong :(",
-                e.getMessage(),
-                Alert.AlertType.ERROR
-            );
-            return null;
-        }
 
-        Scene scene = new Scene(gridPane, 400, 200);
-        Stage stage = new Stage();
-        stage.setTitle("Enter dir name");
-        SimpleUserInputController controller = loader.getController();
-        controller.setTitle("Enter dir name");
-        stage.setScene(scene);
-        stage.showAndWait();
-
-        if (controller.isOk()) {
-            return controller.getUserInput();
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Enter name");
+        dialog.setHeaderText("Please, enter name");
+        dialog.setContentText("Name:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent() && !result.get().isBlank()) {
+            return result.get();
         } else {
             return null;
         }
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
-        try {
-            Path path = explorer.getCurrentPath().resolve(itemsListView.getSelectionModel().getSelectedItem());
-            explorer.delete(path.toFile());
-            fillItemListWithPaths();
-        } catch (IOException e) {
-            DialogManager.showDialog(
-                "Cannot perform operation",
-                e.getMessage(),
-                Alert.AlertType.ERROR
-            );
+
+        Path path = explorer.getCurrentPath().resolve(itemsListView.getSelectionModel().getSelectedItem());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete?");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Are you sure you want to delete \"" + itemsListView.getSelectionModel().getSelectedItem() + "\"");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                explorer.delete(path.toFile());
+                fillItemListWithPaths();
+            } catch (IOException e) {
+                DialogManager.showDialog(
+                    "Cannot perform operation",
+                    e.getMessage(),
+                    Alert.AlertType.ERROR
+                );
+            }
         }
     }
 
