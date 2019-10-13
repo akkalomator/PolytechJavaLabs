@@ -28,7 +28,7 @@
   <ListView fx:id="itemsListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
   <Label text="Explorer" GridPane.columnIndex="0" GridPane.columnSpan="8" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
     <font>
-      <Font size="40.0" />
+      <Font size="30.0" />
     </font>
   </Label>
   <Button mnemonicParsing="false" text="Create dir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onCreateDirButtonClicked"/>
@@ -36,14 +36,14 @@
   <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onDeleteButtonClicked"/>
   <Label text="Files" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
     <font>
-      <Font size="25.0" />
+      <Font size="20.0" />
     </font>
   </Label>
     <Label fx:id="pathLabel" text="Path" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
     <TextArea fx:id="fileContentTextArea" prefWidth="200.0" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="3" />
     <Label text="Editor" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" >
         <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
         </font>
     </Label>
     <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#onSaveButtonClicked"/>
