@@ -25,8 +25,8 @@ class ExplorerTest {
 
 
     @Test
-    void constructor_WorksCorrectly() throws IOException {
-        assertEquals(Path.of(""), new Explorer().getCurrentPath());   // Path is set to path of executable
+    void constructor_WorksCorrectly() {
+        assertEquals(Path.of("").toAbsolutePath(), new Explorer().getCurrentPath());   // Path is set to path of executable
 
         assertEquals(Path.of("C:/"), new Explorer("C:/").getCurrentPath());
     }
