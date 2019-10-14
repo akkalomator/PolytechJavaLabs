@@ -9,6 +9,7 @@ public class Transaction {
     private final int id;
     private final Account from;
     private final Account to;
+
     private final int amount;
 
     private boolean isCompleted;
@@ -55,6 +56,10 @@ public class Transaction {
 
     public Account getSender() {
         return from;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public Account getReciever() {

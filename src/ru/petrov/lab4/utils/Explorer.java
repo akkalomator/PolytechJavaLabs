@@ -15,19 +15,24 @@ public class Explorer {
     private Path currentPath;
 
     public Explorer() {
-        currentPath = Paths.get(DEFAULT_PATH);
+        currentPath = Paths.get(DEFAULT_PATH).toAbsolutePath();
     }
 
-    public Explorer(String path) throws IOException {
-        this.currentPath = Path.of(path).toRealPath();
+    public Explorer(String path) {
+        this.currentPath = Path.of(path).toAbsolutePath();
     }
 
-    public Explorer(Path path) throws IOException {
-        this.currentPath = path.toRealPath();
+    public Explorer(Path path) {
+        this.currentPath = path.toAbsolutePath();
     }
 
     public Path getCurrentPath() {
-        return currentPath;
+        try {
+            return currentPath.toRealPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<Path> getEverythingInDirectory() throws IOException {
@@ -42,11 +47,11 @@ public class Explorer {
         return Files.walk(path, 1).skip(1).map(path::relativize).collect(Collectors.toList());
     }
 
-    public void moveTo(String path) throws IOException {
+    public void moveTo(String path) {
         moveTo(currentPath.resolve(path));
     }
 
-    public void moveTo(Path path) throws IOException {
+    public void moveTo(Path path) {
         Path newPath;
         if (path.isAbsolute()) {
             newPath = path;
@@ -59,7 +64,7 @@ public class Explorer {
         if (!Files.isDirectory(newPath)) {
             throw new IllegalArgumentException("Path " + path.toString() + " is not a directory");
         }
-        currentPath = newPath.toRealPath();
+        currentPath = newPath.toAbsolutePath();
     }
 
     public void createDir(String dirName) throws IOException {

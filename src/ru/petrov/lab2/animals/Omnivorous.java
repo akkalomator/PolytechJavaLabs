@@ -10,4 +10,9 @@ public class Omnivorous extends Animal {
     public FoodType getFoodType() {
         return FoodType.EVERYTHING;
     }
+
+    @Override
+    public String toString() {
+        return "Omnivorous " + super.toString();
+    }
 }

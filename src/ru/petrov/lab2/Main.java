@@ -54,7 +54,7 @@ public class Main {
     }
 
 
-    private static List<Animal> readFromFile(InputStreamReader reader) throws IOException {
+    public static List<Animal> readFromFile(InputStreamReader reader) throws IOException {
         List<Animal> result = new ArrayList<>();
         Scanner sc = new Scanner(reader);
         while (sc.hasNext()) {
@@ -84,10 +84,9 @@ public class Main {
         return result;
     }
 
-    private static void writeTo(String path, String content) throws IOException {
+    public static void writeTo(String path, String content) throws IOException {
         try (FileWriter fw = new FileWriter(path)) {
             fw.write(content);
         }
     }
-
 }

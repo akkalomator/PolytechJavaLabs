@@ -10,4 +10,9 @@ public class Herbivorous extends Animal{
     public FoodType getFoodType() {
         return FoodType.PLANTS;
     }
+
+    @Override
+    public String toString() {
+        return "Herbivorous " + super.toString();
+    }
 }

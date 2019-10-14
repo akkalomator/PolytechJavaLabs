@@ -46,3 +46,12 @@ _______________________________________________________________________________
 - Class `SynchronousTransactionManager` executes all transactions in one thread by the queue
 - Class `AsynchronousTransactionManager` executes all transactions in multiple threads using `ExecutorService` thread
 - Class `TransactionDemo` can show how `AsynchronousTransactionManager` works
+
+_______________________________________________________________________________
+
+- Sources for Lab #7 are located at `src/ru/petrov/lab7`
+- UI layouts for Lab #7 are located at `resources/lab7/layout`
+- Test are not provided due to simplicity of logic
+- JavaFX was used, so updating maven project is required prior to compiling app
+- Class `App` launches application
+- In package `lab7.controllers` there are 6 controllers, each for every page of app
