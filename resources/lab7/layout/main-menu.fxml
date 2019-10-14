@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <TabPane blendMode="DARKEN" minHeight="450.0" minWidth="800.0" pickOnBounds="false" xmlns:fx="http://javafx.com/fxml/1"
          xmlns="http://javafx.com/javafx/2.2">
     <Tab id="lab1" closable="false" text="Lab 1">
@@ -21,6 +20,6 @@
         <fx:include source="lab5.fxml" />
     </Tab>
     <Tab id="lab6" closable="false" text="Lab 6">
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        <fx:include source="lab6.fxml" />
     </Tab>
 </TabPane>
