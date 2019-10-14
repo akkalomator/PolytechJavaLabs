@@ -13,7 +13,6 @@ import org.xml.sax.SAXException;
 import ru.petrov.lab6.transactions.Account;
 import ru.petrov.lab6.transactions.Transaction;
 import ru.petrov.lab6.transactions.managers.AsynchronousTransactionManager;
-import ru.petrov.lab6.transactions.managers.SynchronousTransactionManager;
 import ru.petrov.lab6.transactions.managers.TransactionManager;
 import ru.petrov.lab6.utils.XMLTransactionsLoader;
 import ru.petrov.lab7.utils.DialogManager;
@@ -72,7 +71,7 @@ public class Lab6Controller implements Initializable {
         Map<Integer, Account> accounts = generateSampleAccounts();
         File file = new File(pathTextField.getText());
         XMLTransactionsLoader loader = new XMLTransactionsLoader();
-        List<Transaction> transactions = null;
+        List<Transaction> transactions;
         try {
             transactions = loader.load(file, accounts);
         } catch (ParserConfigurationException | IOException | SAXException e) {
@@ -81,6 +80,7 @@ public class Lab6Controller implements Initializable {
                 "Cannot read from file",
                 Alert.AlertType.ERROR
             );
+            return;
         }
         TransactionManager manager = new AsynchronousTransactionManager(transactions);
         manager.completeTransactions();
