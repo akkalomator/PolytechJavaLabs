@@ -127,6 +127,7 @@ public class Lab1Controller implements Initializable {
         Book book = new Book(author, name, year);
         shelf.addBook(book);
         booksTable.getItems().add(book);
+        clearFields();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
@@ -144,6 +145,7 @@ public class Lab1Controller implements Initializable {
         }
         shelf.deleteAllWhere(bookPredicate);
         booksTable.getItems().setAll(shelf.getAllBooks());
+        clearFields();
     }
 
     public void onAllButtonClicked(ActionEvent actionEvent) {
@@ -165,5 +167,12 @@ public class Lab1Controller implements Initializable {
         }
         List<Book> books = shelf.getAllWhere(bookPredicate);
         booksTable.getItems().setAll(books);
+        clearFields();
+    }
+
+    private void clearFields() {
+        bookAuthorField.setText("");
+        bookNameField.setText("");
+        bookYearField.setText("");
     }
 }

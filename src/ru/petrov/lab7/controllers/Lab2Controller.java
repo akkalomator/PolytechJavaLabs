@@ -141,6 +141,7 @@ public class Lab2Controller implements Initializable {
 
         animals.add(animal);
         animalsTable.getItems().add(animal);
+        clearFields();
     }
 
     public void onAButtonClicked(ActionEvent actionEvent) {
@@ -216,5 +217,10 @@ public class Lab2Controller implements Initializable {
                 Alert.AlertType.ERROR
             );
         }
+    }
+
+    private void clearFields() {
+        nameField.setText("");
+        foodAmountField.setText("");
     }
 }
