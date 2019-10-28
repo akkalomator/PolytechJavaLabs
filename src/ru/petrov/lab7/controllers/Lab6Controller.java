@@ -54,7 +54,7 @@ public class Lab6Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("sender"));
-        toColumn.setCellValueFactory(new PropertyValueFactory<>("reciever"));
+        toColumn.setCellValueFactory(new PropertyValueFactory<>("receiver"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         completedColumn.setCellValueFactory(new PropertyValueFactory<>("completed"));
     }

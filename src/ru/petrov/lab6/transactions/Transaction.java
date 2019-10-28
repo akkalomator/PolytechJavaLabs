@@ -62,7 +62,7 @@ public class Transaction {
         return amount;
     }
 
-    public Account getReciever() {
+    public Account getReceiver() {
         return to;
     }
 

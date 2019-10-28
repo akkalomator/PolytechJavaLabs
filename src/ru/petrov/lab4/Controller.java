@@ -62,7 +62,7 @@ public class Controller implements AutoCloseable {
                 case CHANGE_DIRECTORY_COMMAND: {
                     try {
                         explorerProvider.onChangeDirectory(command[1]);
-                    } catch (IllegalArgumentException | IOException e) {
+                    } catch (IllegalArgumentException e) {
                         writer.printError(e.getMessage());
                     }
                     break;

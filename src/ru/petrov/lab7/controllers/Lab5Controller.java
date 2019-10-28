@@ -78,10 +78,10 @@ public class Lab5Controller implements Initializable {
                 parser.getProperties()
                     .entrySet()
                     .stream()
-                    .map(entry -> {
-                        return new KeyValuePair<>(entry.getKey(), entry.getValue());
-                    })
-                .collect(Collectors.toList())
+                    .map(entry ->
+                        new KeyValuePair<>(entry.getKey(), entry.getValue())
+                    )
+                    .collect(Collectors.toList())
             );
 
         } catch (IOException e) {

@@ -19,7 +19,7 @@ class ExplorerTest {
     private Explorer explorer;
 
     @BeforeEach
-    void init() throws IOException {
+    void init() {
         explorer = new Explorer(INITIAL_PATH);
     }
 

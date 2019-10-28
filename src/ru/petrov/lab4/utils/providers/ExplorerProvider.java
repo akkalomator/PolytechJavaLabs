@@ -25,7 +25,7 @@ public class ExplorerProvider {
         content.forEach(System.out::println);
     }
 
-    public void onChangeDirectory(String commandParam) throws IOException {
+    public void onChangeDirectory(String commandParam) {
         Path path = Path.of(commandParam);
         explorer.moveTo(path);
     }
