@@ -81,6 +81,12 @@ public class Lab3Controller implements Initializable {
                 "Offset is out of bounds",
                 Alert.AlertType.ERROR
             );
+        } catch (NumberFormatException e) {
+            DialogManager.showDialog(
+                "Cannot insert",
+                "Invalid offset",
+                Alert.AlertType.ERROR
+            );
         }
     }
 
